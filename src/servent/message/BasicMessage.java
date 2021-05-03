@@ -124,6 +124,9 @@ public class BasicMessage implements Message {
 		newRouteList.add(newRouteItem);
 		Message toReturn = new BasicMessage(getMessageType(), getOriginalSenderInfo(),
 				getReceiverInfo(), isWhite(), newRouteList, getMessageText(), getMessageId());
+
+		if(getMessageType() == MessageType.AB_MARKER)
+			toReturn.setVectorClock(getVectorClock());
 		
 		return toReturn;
 	}
@@ -139,8 +142,9 @@ public class BasicMessage implements Message {
 			
 			Message toReturn = new BasicMessage(getMessageType(), getOriginalSenderInfo(),
 					newReceiverInfo, isWhite(), getRoute(), getMessageText(), getMessageId());
-			if(getMessageType() == MessageType.AB_MARKER)
+			if(getMessageType() == MessageType.AB_MARKER) {
 				toReturn.setVectorClock(getVectorClock());
+			}
 
 			
 			return toReturn;

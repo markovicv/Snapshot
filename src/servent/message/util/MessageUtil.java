@@ -52,12 +52,7 @@ public class MessageUtil {
 	
 			clientMessage = (Message) ois.readObject();
 			
-			if (AppConfig.IS_FIFO) {
-				String response = "ACK";
-				ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-				oos.writeObject(response);
-				oos.flush();
-			}
+
 			
 			socket.close();
 		} catch (IOException e) {

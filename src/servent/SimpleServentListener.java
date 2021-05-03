@@ -19,6 +19,8 @@ import servent.handler.PingHandler;
 import servent.handler.PongHandler;
 import servent.handler.TransactionHandler;
 
+import servent.handler.snapshot.ABMarkerMessageHandler;
+import servent.handler.snapshot.ABTellDirectlyCollectorHandler;
 import servent.message.Message;
 import servent.message.MessageType;
 import servent.message.util.MessageUtil;
@@ -75,6 +77,9 @@ public class SimpleServentListener implements Runnable, Cancellable {
 
                 MessageHandler messageHandler = new NullHandler(clientMessage);
 
+                if(clientMessage.getMessageType()==MessageType.AB_MARKER){
+                    AppConfig.timestampedStandardPrint("DOSO marker");
+                }
                 /*
                  * Each message type has it's own handler.
                  * If we can get away with stateless handlers, we will,
@@ -90,6 +95,11 @@ public class SimpleServentListener implements Runnable, Cancellable {
                     case TRANSACTION:
                         messageHandler = new TransactionHandler(clientMessage, snapshotCollector.getBitcakeManager());
                         break;
+                    case AB_MARKER:
+                        messageHandler = new ABMarkerMessageHandler(clientMessage,snapshotCollector);
+                        break;
+                    case AB_TELL_DIRECT:
+                        messageHandler = new ABTellDirectlyCollectorHandler(clientMessage,snapshotCollector);
                     case POISON:
                         break;
                 }

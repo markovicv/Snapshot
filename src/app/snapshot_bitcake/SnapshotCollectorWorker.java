@@ -78,7 +78,8 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
             switch (snapshotType) {
 
                 case AB:
-                    ((ABBitcakeManager)bitcakeManager).markEvent(AppConfig.myServentInfo,this);
+                    ((ABBitcakeManager)bitcakeManager).markEvent();
+                    break;
 
                 case NAIVE:
                     break;
@@ -91,6 +92,7 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
                 switch (snapshotType) {
 
                     case AB:
+                        System.out.println("collected: "+collectedABValues.size()+ " - "+ "max: "+AppConfig.getServentCount());
                         if(collectedABValues.size() == AppConfig.getServentCount()){
                             waiting=false;
                         }
@@ -115,6 +117,16 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
             //print
             int sum;
             switch (snapshotType) {
+                case AB:
+                    sum = 0;
+                    for(Entry<Integer,ABSnapshotResult> entry:this.collectedABValues.entrySet()){
+                        sum+=entry.getValue().getRecordedAmount();
+                        AppConfig.timestampedStandardPrint(
+                                "Recorded bitcake amount for " + entry.getKey() + " = " + entry.getValue().getRecordedAmount());
+                    }
+                    AppConfig.timestampedStandardPrint("System bitcake count: " + sum);
+                    collectedABValues.clear();
+                    break;
 
                 case NONE:
                     //Shouldn't be able to come here. See constructor.

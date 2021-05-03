@@ -1,9 +1,9 @@
 package app.snapshot_bitcake;
 
 import app.AppConfig;
-import app.ServentInfo;
 import servent.message.Message;
 import servent.message.snapshot.ABMarkerMessage;
+import servent.message.snapshot.ABTellDirectlyCollectorMessage;
 import servent.message.util.MessageUtil;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -34,14 +34,23 @@ public class ABBitcakeManager implements BitcakeManager{
     /*
         initiates causal broadcast marker to all neighbors
      */
-    public void markEvent(ServentInfo collectorInfo,SnapshotCollector snapshotCollector){
+    public void markEvent(){
         recordedAmount = getCurrentBitcakeAmount();
 
         Message abMarkerMessage = new ABMarkerMessage(AppConfig.myServentInfo,null,AppConfig.myServentInfo.getId(),CausalBroadcastShared.vectorClock);
         for(Integer neighbor : AppConfig.myServentInfo.getNeighbors()){
             abMarkerMessage = abMarkerMessage.changeReceiver(neighbor);
+            System.out.println(abMarkerMessage);
             MessageUtil.sendMessage(abMarkerMessage);
         }
+
+        // commit localy
+
+        Message commitMessageLocaly = new ABMarkerMessage(AppConfig.myServentInfo,AppConfig.myServentInfo,AppConfig.myServentInfo.getId(),CausalBroadcastShared.vectorClock);
+        System.out.println(commitMessageLocaly);
+//        MessageUtil.sendMessage(commitMessageLocaly);
+
+        CausalBroadcastShared.commitCausalMessage(commitMessageLocaly);
 
 
 
@@ -49,7 +58,21 @@ public class ABBitcakeManager implements BitcakeManager{
 
 
     public void handleMarker(Message clientMessage,SnapshotCollector snapshotCollector){
+        int collectorId = Integer.parseInt(clientMessage.getMessageText());
+        System.out.println("id: "+clientMessage.getOriginalSenderInfo().getId()+" rec: "+clientMessage.getReceiverInfo().getId()+ " msg: "+clientMessage.getMessageText());
 
+        ABSnapshotResult snapshotResult = new ABSnapshotResult(AppConfig.myServentInfo.getId(),recordedAmount);
+        if(AppConfig.myServentInfo.getId() == collectorId)
+            snapshotCollector.addAcharyaBadrinathInfo(collectorId,snapshotResult);
+        else{
+            // bad way, sending message directly to collector
+            Message directMessage = new ABTellDirectlyCollectorMessage(AppConfig.myServentInfo,AppConfig.getInfoById(collectorId),snapshotResult);
+            MessageUtil.sendMessage(directMessage);
+
+            // good way, broadcast snapshot result to neighbors
+        }
+
+        recordedAmount = 0;
 
     }
 }
