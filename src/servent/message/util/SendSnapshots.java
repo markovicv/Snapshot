@@ -34,7 +34,7 @@ public class SendSnapshots implements Runnable, Cancellable {
                     break;
                 if(message.getMessageType()==MessageType.AB_MARKER){
                     ABBitcakeManager abBitcakeManager = (ABBitcakeManager) bitcakeManager;
-                    abBitcakeManager.handleMarker(message,snapshotCollector);
+                    abBitcakeManager.handleMarker(message,snapshotCollector,abBitcakeManager.getCurrentBitcakeAmount());
                 }
 
 

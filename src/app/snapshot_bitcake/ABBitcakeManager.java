@@ -8,6 +8,7 @@ import servent.message.snapshot.ABTellDirectlyCollectorMessage;
 import servent.message.util.MessageUtil;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ABBitcakeManager implements BitcakeManager{
@@ -37,15 +38,16 @@ public class ABBitcakeManager implements BitcakeManager{
         initiates causal broadcast marker to all neighbors
      */
     public void markEvent(){
-        recordedAmount = getCurrentBitcakeAmount();
+//        recordedAmount = getCurrentBitcakeAmount();
 
 //        Message abMarkerMessage = new ABMarkerMessage(AppConfig.myServentInfo,null,AppConfig.myServentInfo.getId(),CausalBroadcastShared.vectorClock);
 
         Map<Integer,Integer> myClock = CausalBroadcastShared.getVectorClock();
+        Map<Integer,Integer> myClockCopy = new ConcurrentHashMap<>(myClock);
         ServentInfo myInfo = AppConfig.myServentInfo;
         for(Integer neighbor : AppConfig.myServentInfo.getNeighbors()){
 
-            Message abMarkerMessage = new ABMarkerMessage(myInfo,AppConfig.getInfoById(neighbor),AppConfig.myServentInfo.getId(),myClock);
+            Message abMarkerMessage = new ABMarkerMessage(myInfo,AppConfig.getInfoById(neighbor),AppConfig.myServentInfo.getId(),myClockCopy);
             MessageUtil.sendMessage(abMarkerMessage);
 
             /*
@@ -57,9 +59,9 @@ public class ABBitcakeManager implements BitcakeManager{
         }
 
 
-        Message commitMessageLocaly = new ABMarkerMessage(myInfo,myInfo,AppConfig.myServentInfo.getId(),myClock);
+        Message commitMessageLocaly = new ABMarkerMessage(myInfo,myInfo,AppConfig.myServentInfo.getId(),myClockCopy);
         MessageUtil.sendMessage(commitMessageLocaly);
-//        CausalBroadcastShared.commitCausalMessage(commitMessageLocaly);
+        CausalBroadcastShared.commitCausalMessage(commitMessageLocaly);
 
 
 //        CausalBroadcastShared.sendSnapshotResult(snapshotCollector.getBitcakeManager(), snapshotCollector);
@@ -71,11 +73,12 @@ public class ABBitcakeManager implements BitcakeManager{
     }
 
 
-    public void handleMarker(Message clientMessage,SnapshotCollector snapshotCollector){
+    public void handleMarker(Message clientMessage,SnapshotCollector snapshotCollector,int currentBitcake){
         int collectorId = Integer.parseInt(clientMessage.getMessageText());
 //        System.out.println("id: "+clientMessage.getOriginalSenderInfo().getId()+" rec: "+clientMessage.getReceiverInfo().getId()+ " msg: "+clientMessage.getMessageText());
 
-        ABSnapshotResult snapshotResult = new ABSnapshotResult(AppConfig.myServentInfo.getId(),recordedAmount);
+        ABSnapshotResult snapshotResult = new ABSnapshotResult(AppConfig.myServentInfo.getId(),currentBitcake);
+        System.out.println("Pre recordovanja : "+currentBitcake);
         if(AppConfig.myServentInfo.getId() == collectorId)
             snapshotCollector.addAcharyaBadrinathInfo(collectorId,snapshotResult);
         else{

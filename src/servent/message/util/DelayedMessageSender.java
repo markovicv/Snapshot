@@ -46,16 +46,7 @@ public class DelayedMessageSender implements Runnable {
 
         try {
 
-            synchronized (AppConfig.msgLock){
-                if(messageToSend.getMessageType() == MessageType.AB_MARKER){
-                    int sent = AppConfig.sendMessagesToNeighbors.incrementAndGet();
-                    if(sent>=AppConfig.myServentInfo.getNeighbors().size()){
-                        AppConfig.sendMessagesToNeighbors.set(0);
-                        CausalBroadcastShared.commitCausalMessage(new ABMarkerMessage(AppConfig.myServentInfo,AppConfig.myServentInfo,AppConfig.myServentInfo.getId(),CausalBroadcastShared.getVectorClock()));
 
-                    }
-                }
-            }
 //            synchronized (AppConfig.msgLock){
 //                if(messageToSend.getMessageType() == MessageType.AB_MARKER){
 //                    if(AppConfig.sendMessagesToNeighbors.get() < 6){

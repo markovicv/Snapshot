@@ -21,6 +21,9 @@ public class ABTellDirectlyCollectorHandler implements MessageHandler {
         if(clientMessage.getMessageType()== MessageType.AB_TELL_DIRECT){
 
             ABTellDirectlyCollectorMessage abTellDirectlyCollector = (ABTellDirectlyCollectorMessage) clientMessage;
+            System.out.println("Recordovano aaa: "+abTellDirectlyCollector.getAbSnapshotResult().getRecordedAmount());
+
+
             snapshotCollector.addAcharyaBadrinathInfo(abTellDirectlyCollector.getOriginalSenderInfo().getId(),
                     abTellDirectlyCollector.getAbSnapshotResult());
 

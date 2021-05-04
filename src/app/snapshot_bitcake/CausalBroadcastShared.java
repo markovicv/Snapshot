@@ -60,7 +60,7 @@ public class CausalBroadcastShared {
         synchronized (causalMessageLock){
             for(Message message:commitedCausalMessages){
                 ABBitcakeManager abBitcakeManager = (ABBitcakeManager) bitcakeManager;
-                abBitcakeManager.handleMarker(message,snapshotCollector);
+                abBitcakeManager.handleMarker(message,snapshotCollector,abBitcakeManager.getCurrentBitcakeAmount());
             }
         }
 

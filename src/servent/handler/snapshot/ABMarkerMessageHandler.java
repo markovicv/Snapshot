@@ -36,6 +36,7 @@ public class ABMarkerMessageHandler implements MessageHandler {
 //        System.out.println("adding marker to queue");
 //        System.out.println("body of msg: " + clientMessage.getMessageText());
 //        System.out.println("dobijen clock: "+clientMessage.getVectorClock());
+        System.out.println("PRIMIO MARKER IMAM KOLACICA OVOLIKO !!!!! "+snapshotCollector.getBitcakeManager().getCurrentBitcakeAmount());
         CausalBroadcastShared.addPendingMessages(clientMessage);
         CausalBroadcastShared.checkPandingMessages();
 //        CausalBroadcastShared.sendSnapshotResult(snapshotCollector.getBitcakeManager(), snapshotCollector);
