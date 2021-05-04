@@ -145,6 +145,7 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
     //TODO
     @Override
     public void addAcharyaBadrinathInfo(int id,ABSnapshotResult snapshotResult) {
+        System.out.println("UBACIO JE :::: "+id);
         this.collectedABValues.put(id,snapshotResult);
 
     }

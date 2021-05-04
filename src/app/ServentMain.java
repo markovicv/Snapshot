@@ -8,8 +8,8 @@ import app.snapshot_bitcake.SnapshotCollectorWorker;
 import app.snapshot_bitcake.SnapshotType;
 import cli.CLIParser;
 import servent.SimpleServentListener;
-import servent.message.util.FifoSendWorker;
 import servent.message.util.MessageUtil;
+import servent.message.util.SendSnapshots;
 
 /**
  * Describes the procedure for starting a single Servent
@@ -75,21 +75,11 @@ public class ServentMain {
         Thread listenerThread = new Thread(simpleListener);
         listenerThread.start();
 
-        List<FifoSendWorker> senderWorkers = new ArrayList<>();
-        if (AppConfig.IS_FIFO) {
-            for (Integer neighbor : AppConfig.myServentInfo.getNeighbors()) {
-                FifoSendWorker senderWorker = new FifoSendWorker(neighbor);
+        SendSnapshots sendSnapshots = new SendSnapshots(snapshotCollector);
+        Thread sendSnapshotThread = new Thread(sendSnapshots);
+        sendSnapshotThread.start();
 
-                Thread senderThread = new Thread(senderWorker);
-
-                senderThread.start();
-
-                senderWorkers.add(senderWorker);
-            }
-
-        }
-
-        CLIParser cliParser = new CLIParser(simpleListener, senderWorkers, snapshotCollector);
+        CLIParser cliParser = new CLIParser(simpleListener, snapshotCollector,sendSnapshots);
         Thread cliThread = new Thread(cliParser);
         cliThread.start();
 

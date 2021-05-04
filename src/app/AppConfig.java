@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import app.snapshot_bitcake.CausalBroadcastShared;
 import app.snapshot_bitcake.SnapshotType;
@@ -50,9 +51,11 @@ public class AppConfig {
      * </ul>
      */
     public static SnapshotType SNAPSHOT_TYPE;
+    public static AtomicInteger sendMessagesToNeighbors = new AtomicInteger(0);
 
     public static AtomicBoolean isWhite = new AtomicBoolean(true);
     public static Object colorLock = new Object();
+    public static Object msgLock = new Object();
 
     /**
      * Print a message to stdout with a timestamp

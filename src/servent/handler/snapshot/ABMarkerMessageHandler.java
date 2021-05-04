@@ -8,6 +8,7 @@ import app.snapshot_bitcake.SnapshotCollector;
 import servent.handler.MessageHandler;
 import servent.message.Message;
 import servent.message.MessageType;
+import servent.message.snapshot.ABMarkerMessage;
 import servent.message.util.MessageUtil;
 
 public class ABMarkerMessageHandler implements MessageHandler {
@@ -30,32 +31,39 @@ public class ABMarkerMessageHandler implements MessageHandler {
             3 - send snapshot result back to original node
          */
 
-        System.out.println(clientMessage.getMessageType());
-        if(clientMessage.getMessageType() == MessageType.AB_MARKER){
-            System.out.println("adding marker to queue");
-            System.out.println("body of msg: "+clientMessage.getMessageText());
 
+//        if(clientMessage.getMessageType() == MessageType.AB_MARKER){
+//        System.out.println("adding marker to queue");
+//        System.out.println("body of msg: " + clientMessage.getMessageText());
+//        System.out.println("dobijen clock: "+clientMessage.getVectorClock());
+        CausalBroadcastShared.addPendingMessages(clientMessage);
+        CausalBroadcastShared.checkPandingMessages();
+//        CausalBroadcastShared.sendSnapshotResult(snapshotCollector.getBitcakeManager(), snapshotCollector);
 
-            if(clientMessage.getOriginalSenderInfo().getId() != AppConfig.myServentInfo.getId()){
-                boolean seen = CausalBroadcastShared.pendingMessagesQueue.contains(clientMessage);
-                if(!seen){
-                    CausalBroadcastShared.addPendingMessages(clientMessage);
-                    CausalBroadcastShared.checkPandingMessages();
-                    CausalBroadcastShared.sendSnapshotResult(snapshotCollector.getBitcakeManager(),snapshotCollector);
-
-                    AppConfig.timestampedStandardPrint("Rebroadcasting");
-                    for(Integer neighbor:AppConfig.myServentInfo.getNeighbors()){
-                        MessageUtil.sendMessage(clientMessage.changeReceiver(neighbor).makeMeASender());
-                    }
-                }
-                else
-                    AppConfig.timestampedStandardPrint("Has this message. No rebroadcasting");
-
-            }
-        }
+//            if(clientMessage.getOriginalSenderInfo().getId() != AppConfig.myServentInfo.getId()){
+//                boolean seen = CausalBroadcastShared.pendingMessagesQueue.contains(clientMessage);
+//                if(!seen){
+//                    CausalBroadcastShared.addPendingMessages(clientMessage);
+//                    CausalBroadcastShared.checkPandingMessages();
+//                    CausalBroadcastShared.sendSnapshotResult(snapshotCollector.getBitcakeManager(),snapshotCollector);
+//
+//                    AppConfig.timestampedStandardPrint("Rebroadcasting");
+//                    for(Integer neighbor:AppConfig.myServentInfo.getNeighbors()){
+//                        MessageUtil.sendMessage(clientMessage.changeReceiver(neighbor).makeMeASender());
+//
+//
+//                    }
+//                    CausalBroadcastShared.commitCausalMessage(new ABMarkerMessage(AppConfig.myServentInfo,AppConfig.myServentInfo,AppConfig.myServentInfo.getId(),CausalBroadcastShared.getVectorClock()));
+//
+//                }
+//                else
+//                    AppConfig.timestampedStandardPrint("Has this message. No rebroadcasting");
+//
+//            }
+//        }
     }
 
-    private void rebroadcast(){
+    private void rebroadcast() {
 
     }
 }

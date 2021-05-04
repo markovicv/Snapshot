@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import app.AppConfig;
+import app.ServentInfo;
 import servent.message.Message;
 import servent.message.MessageType;
 
@@ -33,14 +34,10 @@ public class MessageUtil {
 	 */
 	public static final boolean MESSAGE_UTIL_PRINTING = true;
 	
-	public static Map<Integer, BlockingQueue<Message>> pendingMessages = new ConcurrentHashMap<>();
-	public static Map<Integer, BlockingQueue<Message>> pendingMarkers = new ConcurrentHashMap<>();
+
 	
 	public static void initializePendingMessages() {
-		for (Integer neighbor : AppConfig.myServentInfo.getNeighbors()) {
-			pendingMarkers.put(neighbor, new LinkedBlockingQueue<>());
-			pendingMessages.put(neighbor, new LinkedBlockingQueue<>());
-		}
+
 	}
 	
 	public static Message readMessage(Socket socket) {
@@ -70,21 +67,33 @@ public class MessageUtil {
 	}
 	
 	public static void sendMessage(Message message) {
-		
-		if (AppConfig.IS_FIFO) {
-			try {
-				if (message.getMessageType() == MessageType.CL_MARKER) {
-					pendingMarkers.get(message.getReceiverInfo().getId()).put(message);
-				} else {
-					pendingMessages.get(message.getReceiverInfo().getId()).put(message);
-				}
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		} else {
-			Thread delayedSender = new Thread(new DelayedMessageSender(message));
-			
-			delayedSender.start();
-		}
+
+//		System.out.println("unutar send message: "+message.getVectorClock());
+//		System.out.println(message);
+		Thread thread = new Thread(new DelayedMessageSender(message));
+		thread.start();
+//		try{
+//			Thread.sleep((long)(Math.random()*1000)+500);
+//		}
+//		catch (Exception e){
+//			e.printStackTrace();
+//		}
+//		ServentInfo receiverInfo = message.getReceiverInfo();
+//		if(MESSAGE_UTIL_PRINTING)
+//			AppConfig.timestampedStandardPrint("Sending message "+message);
+//
+//		try{
+//
+//			Socket sendSocket = new Socket(receiverInfo.getIpAddress(),receiverInfo.getListenerPort());
+//			ObjectOutputStream oos = new ObjectOutputStream(sendSocket.getOutputStream());
+//			oos.writeObject(message);
+//			oos.flush();
+//			sendSocket.close();
+//		}
+//		catch (IOException e){
+//
+//			AppConfig.timestampedErrorPrint("Couldnt send message: "+message.toString());
+//		}
+
 	}
 }

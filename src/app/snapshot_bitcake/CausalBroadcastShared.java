@@ -5,15 +5,13 @@ import servent.message.Message;
 import servent.message.snapshot.ABMarkerMessage;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.*;
 import java.util.function.BiFunction;
 
 public class CausalBroadcastShared {
 
     public static Map<Integer,Integer> vectorClock = new ConcurrentHashMap<>();
-    public static List<Message> commitedCausalMessages = new CopyOnWriteArrayList<>();
+    public static BlockingQueue<Message> commitedCausalMessages = new LinkedBlockingQueue();
     public static Queue<Message> pendingMessagesQueue = new ConcurrentLinkedQueue<>();
     public static Object pendingMessagesQueueLock = new Object();
     public static Object causalMessageLock = new Object();
@@ -58,6 +56,7 @@ public class CausalBroadcastShared {
 
     public static void sendSnapshotResult(BitcakeManager bitcakeManager,SnapshotCollector snapshotCollector){
         System.out.println("SNAP RESULT ");
+        System.out.println(commitedCausalMessages.size());
         synchronized (causalMessageLock){
             for(Message message:commitedCausalMessages){
                 ABBitcakeManager abBitcakeManager = (ABBitcakeManager) bitcakeManager;
@@ -78,11 +77,14 @@ public class CausalBroadcastShared {
                 Iterator<Message> iterator = pendingMessagesQueue.iterator();
                 Map<Integer,Integer> myVectorClock = getVectorClock();
                 while(iterator.hasNext()){
-
                     Message pendingMsg = iterator.next();
-                    ABMarkerMessage abMarkerMessage = (ABMarkerMessage)pendingMsg;
+                    System.out.println(pendingMsg.getMessageType());
+
                     System.out.println("vrtim se unutra ");
-                    if(!otherClockGreates(myVectorClock,abMarkerMessage.getVectorClock())){
+                    boolean clockGreater = otherClockGreates(myVectorClock,pendingMsg.getVectorClock());
+                    System.out.println(myVectorClock);
+                    System.out.println(pendingMsg.getVectorClock());
+                    if(!clockGreater){
                         gotWork=true;
 
                         AppConfig.timestampedStandardPrint("Commiting "+pendingMsg);
@@ -91,7 +93,6 @@ public class CausalBroadcastShared {
                         iterator.remove();
                         break;
                     }
-                    System.out.println("izasao sam iz unutrasnje ");
                 }
 
             }

@@ -19,6 +19,7 @@ public class ABTellDirectlyCollectorHandler implements MessageHandler {
     @Override
     public void run() {
         if(clientMessage.getMessageType()== MessageType.AB_TELL_DIRECT){
+
             ABTellDirectlyCollectorMessage abTellDirectlyCollector = (ABTellDirectlyCollectorMessage) clientMessage;
             snapshotCollector.addAcharyaBadrinathInfo(abTellDirectlyCollector.getOriginalSenderInfo().getId(),
                     abTellDirectlyCollector.getAbSnapshotResult());
