@@ -5,15 +5,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import app.snapshot_bitcake.CausalBroadcastShared;
 import app.snapshot_bitcake.SnapshotType;
+import servent.message.Message;
 
 /**
  * This class contains all the global application configuration stuff.
@@ -56,6 +56,8 @@ public class AppConfig {
     public static AtomicBoolean isWhite = new AtomicBoolean(true);
     public static Object colorLock = new Object();
     public static Object msgLock = new Object();
+    public static Set<Message> seen = Collections.newSetFromMap(new ConcurrentHashMap<Message, Boolean>());
+
 
     /**
      * Print a message to stdout with a timestamp

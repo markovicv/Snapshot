@@ -21,6 +21,7 @@ import servent.handler.TransactionHandler;
 
 import servent.handler.snapshot.ABMarkerMessageHandler;
 import servent.handler.snapshot.ABTellDirectlyCollectorHandler;
+import servent.handler.snapshot.ABTellMessageHandler;
 import servent.message.Message;
 import servent.message.MessageType;
 import servent.message.util.MessageUtil;
@@ -100,6 +101,10 @@ public class SimpleServentListener implements Runnable, Cancellable {
                         break;
                     case AB_TELL_DIRECT:
                         messageHandler = new ABTellDirectlyCollectorHandler(clientMessage,snapshotCollector);
+                        break;
+                    case AB_TELL:
+                        messageHandler = new ABTellMessageHandler(clientMessage,snapshotCollector);
+                        break;
                     case POISON:
                         break;
                 }

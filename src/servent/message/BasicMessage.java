@@ -5,6 +5,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import app.AppConfig;
 import app.ServentInfo;
+import app.snapshot_bitcake.ABSnapshotResult;
+import app.snapshot_bitcake.BitcakeManager;
 
 /**
  * A default message implementation. This should cover most situations.
@@ -20,7 +22,7 @@ public class BasicMessage implements Message {
 	private final ServentInfo originalSenderInfo;
 	private final ServentInfo receiverInfo;
 	private final List<ServentInfo> routeList;
-	private final String messageText;
+	private  String messageText;
 	private final boolean white;
 	
 	//This gives us a unique id - incremented in every natural constructor.
@@ -28,7 +30,12 @@ public class BasicMessage implements Message {
 	private final int messageId;
 
 	protected Map<Integer,Integer> senderVectorClock;
-	
+
+	protected ABSnapshotResult abSnapshotResult;
+	protected int collectorId;
+	protected transient BitcakeManager bitcakeManager;
+
+
 	public BasicMessage(MessageType type, ServentInfo originalSenderInfo, ServentInfo receiverInfo) {
 		this.type = type;
 		this.originalSenderInfo = originalSenderInfo;
@@ -83,7 +90,12 @@ public class BasicMessage implements Message {
 	public String getMessageText() {
 		return messageText;
 	}
-	
+
+	@Override
+	public void setMessageText(String message) {
+		this.messageText = message;
+	}
+
 	@Override
 	public int getMessageId() {
 		return messageId;
@@ -97,6 +109,26 @@ public class BasicMessage implements Message {
 	@Override
 	public void setVectorClock(Map<Integer, Integer> clock) {
 		this.senderVectorClock = clock;
+	}
+
+	@Override
+	public void setAbSnapshot(ABSnapshotResult abSnapshotResult) {
+		this.abSnapshotResult = abSnapshotResult;
+	}
+
+	@Override
+	public int getCollectorId() {
+		return collectorId;
+	}
+
+	@Override
+	public ABSnapshotResult getABSnapshotResult() {
+		return abSnapshotResult;
+	}
+
+	@Override
+	public void setCollectorId(int id) {
+		this.collectorId = id;
 	}
 
 	protected BasicMessage(MessageType type, ServentInfo originalSenderInfo, ServentInfo receiverInfo,
@@ -127,6 +159,10 @@ public class BasicMessage implements Message {
 
 		if(getMessageType() == MessageType.AB_MARKER)
 			toReturn.setVectorClock(getVectorClock());
+		if(getMessageType()==MessageType.AB_TELL){
+			toReturn.setAbSnapshot(getABSnapshotResult());
+			toReturn.setCollectorId(getCollectorId());
+		}
 		
 		return toReturn;
 	}
@@ -145,6 +181,12 @@ public class BasicMessage implements Message {
 			if(getMessageType() == MessageType.AB_MARKER) {
 				toReturn.setVectorClock(getVectorClock());
 			}
+			if(getMessageType() == MessageType.AB_TELL){
+				toReturn.setAbSnapshot(getABSnapshotResult());
+				toReturn.setCollectorId(getCollectorId());
+			}
+			if(getMessageType()==MessageType.TRANSACTION)
+				toReturn.setMessageText(getMessageText());
 
 			
 			return toReturn;

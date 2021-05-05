@@ -27,19 +27,14 @@ public class DelayedMessageSender implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("RUN METHOD: " + messageToSend.getVectorClock());
-        /*
-         * A random sleep before sending.
-         * It is important to take regular naps for health reasons.
-         */
+
         try {
             Thread.sleep((long) (Math.random() * 1000) + 500);
         } catch (InterruptedException e1) {
             e1.printStackTrace();
         }
 
-//        ServentInfo receiverInfo = messageToSend.getReceiverInfo();
-        System.out.println("RUN METHOD2: " + messageToSend.getVectorClock());
+
         if (MessageUtil.MESSAGE_UTIL_PRINTING) {
             AppConfig.timestampedStandardPrint("Sending message " + messageToSend);
         }
@@ -47,17 +42,6 @@ public class DelayedMessageSender implements Runnable {
         try {
 
 
-//            synchronized (AppConfig.msgLock){
-//                if(messageToSend.getMessageType() == MessageType.AB_MARKER){
-//                    if(AppConfig.sendMessagesToNeighbors.get() < 6){
-//                        AppConfig.sendMessagesToNeighbors.getAndIncrement();
-//                    }
-//                    else{
-//                        CausalBroadcastShared.commitCausalMessage(new ABMarkerMessage(AppConfig.myServentInfo,AppConfig.myServentInfo,AppConfig.myServentInfo.getId(),CausalBroadcastShared.getVectorClock()));
-//                        AppConfig.sendMessagesToNeighbors.set(0);
-//                    }
-//                }
-//            }
 
             Socket sendSocket = new Socket(messageToSend.getReceiverInfo().getIpAddress(), messageToSend.getReceiverInfo().getListenerPort());
 
@@ -73,6 +57,8 @@ public class DelayedMessageSender implements Runnable {
 //			}
         } catch (IOException e) {
             AppConfig.timestampedErrorPrint("Couldn't send message: " + messageToSend.toString());
+//            AppConfig.timestampedErrorPrint("Couldn't send message: " + messageToSend.getRoute());
+            AppConfig.timestampedErrorPrint(e.getMessage());
         }
     }
 }

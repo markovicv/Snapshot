@@ -9,6 +9,8 @@ public class TransactionHandler implements MessageHandler {
 
 	private Message clientMessage;
 	private BitcakeManager bitcakeManager;
+
+	//TODO ako je meni namenjena obradim i posaljem drugima, inace samo broadcastujem
 	
 	public TransactionHandler(Message clientMessage, BitcakeManager bitcakeManager) {
 		this.clientMessage = clientMessage;

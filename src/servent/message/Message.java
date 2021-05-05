@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import app.ServentInfo;
+import app.snapshot_bitcake.ABSnapshotResult;
 
 /**
  * This is your basic message. It should cover most needs.
@@ -99,6 +100,15 @@ public interface Message extends Serializable {
 	Map<Integer,Integer> getVectorClock();
 
 	void setVectorClock(Map<Integer,Integer> clock);
+
+	void setAbSnapshot(ABSnapshotResult abSnapshotResult);
+	ABSnapshotResult getABSnapshotResult();
+
+	int getCollectorId();
+	void setCollectorId(int id);
+
+
+	void setMessageText(String message);
 
 	/**
 	 * This method is invoked by the frameworks sender code. It is invoked

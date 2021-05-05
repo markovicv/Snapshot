@@ -1,0 +1,29 @@
+13:44:09 - Trying to make a message for 4 who is not a neighbor.
+Exception in thread "Thread-6" java.lang.NullPointerException
+	at servent.message.BasicMessage.toString(BasicMessage.java:240)
+	at java.base/java.lang.String.valueOf(String.java:2951)
+	at java.base/java.lang.StringBuilder.append(StringBuilder.java:168)
+	at servent.message.util.DelayedMessageSender.run(DelayedMessageSender.java:39)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+13:44:11 - my id: 4 originalSender: 4
+13:44:11 - my id: 4 originalSender: 4
+13:44:13 - my id: 4 originalSender: 4
+13:44:13 - my id: 4 originalSender: 4
+13:44:13 - my id: 4 originalSender: 4
+13:44:13 - my id: 4 originalSender: 4
+13:44:13 - my id: 4 originalSender: 4
+13:44:13 - my id: 4 originalSender: 4
+13:44:13 - my id: 4 originalSender: 4
+13:44:13 - my id: 4 originalSender: 4
+13:44:13 - my id: 4 originalSender: 4
+13:44:14 - my id: 4 originalSender: 4
+13:44:14 - my id: 4 originalSender: 4
+13:44:14 - my id: 4 originalSender: 4
+13:44:14 - my id: 4 originalSender: 4
+13:44:14 - my id: 4 originalSender: 4
+13:44:15 - my id: 4 originalSender: 4
+13:44:15 - my id: 4 originalSender: 4
+13:44:15 - my id: 4 originalSender: 4
+13:44:15 - my id: 4 originalSender: 4
+13:44:15 - my id: 4 originalSender: 4
+13:44:16 - my id: 4 originalSender: 4

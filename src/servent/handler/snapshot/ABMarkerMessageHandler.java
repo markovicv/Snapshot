@@ -11,6 +11,9 @@ import servent.message.MessageType;
 import servent.message.snapshot.ABMarkerMessage;
 import servent.message.util.MessageUtil;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 public class ABMarkerMessageHandler implements MessageHandler {
 
 
@@ -32,36 +35,36 @@ public class ABMarkerMessageHandler implements MessageHandler {
          */
 
 
-//        if(clientMessage.getMessageType() == MessageType.AB_MARKER){
-//        System.out.println("adding marker to queue");
-//        System.out.println("body of msg: " + clientMessage.getMessageText());
-//        System.out.println("dobijen clock: "+clientMessage.getVectorClock());
-        System.out.println("PRIMIO MARKER IMAM KOLACICA OVOLIKO !!!!! "+snapshotCollector.getBitcakeManager().getCurrentBitcakeAmount());
-        CausalBroadcastShared.addPendingMessages(clientMessage);
-        CausalBroadcastShared.checkPandingMessages();
-//        CausalBroadcastShared.sendSnapshotResult(snapshotCollector.getBitcakeManager(), snapshotCollector);
+        if(clientMessage.getMessageType() == MessageType.AB_MARKER){
 
-//            if(clientMessage.getOriginalSenderInfo().getId() != AppConfig.myServentInfo.getId()){
-//                boolean seen = CausalBroadcastShared.pendingMessagesQueue.contains(clientMessage);
-//                if(!seen){
-//                    CausalBroadcastShared.addPendingMessages(clientMessage);
-//                    CausalBroadcastShared.checkPandingMessages();
+            if(clientMessage.getOriginalSenderInfo().getId() != AppConfig.myServentInfo.getId()){
+
+                // TODO uradjen konkurentan set za Causal
+                boolean didPut = CausalBroadcastShared.seenMessages.add(clientMessage);
+
+                if(didPut){
+                    CausalBroadcastShared.seenMessages.add(clientMessage);
+                    CausalBroadcastShared.addPendingMessages(clientMessage);
+                    CausalBroadcastShared.checkPandingMessages();
 //                    CausalBroadcastShared.sendSnapshotResult(snapshotCollector.getBitcakeManager(),snapshotCollector);
-//
-//                    AppConfig.timestampedStandardPrint("Rebroadcasting");
-//                    for(Integer neighbor:AppConfig.myServentInfo.getNeighbors()){
-//                        MessageUtil.sendMessage(clientMessage.changeReceiver(neighbor).makeMeASender());
-//
-//
-//                    }
-//                    CausalBroadcastShared.commitCausalMessage(new ABMarkerMessage(AppConfig.myServentInfo,AppConfig.myServentInfo,AppConfig.myServentInfo.getId(),CausalBroadcastShared.getVectorClock()));
-//
-//                }
-//                else
-//                    AppConfig.timestampedStandardPrint("Has this message. No rebroadcasting");
-//
-//            }
-//        }
+
+                    AppConfig.timestampedStandardPrint("Rebroadcasting");
+                    Map<Integer,Integer> myClockCopy = clientMessage.getVectorClock();
+                    for(Integer neighbor:AppConfig.myServentInfo.getNeighbors()){
+//                        clientMessage.setVectorClock(myClockCopy);
+                        MessageUtil.sendMessage(clientMessage.changeReceiver(neighbor).makeMeASender());
+
+
+                    }
+
+                    CausalBroadcastShared.commitCausalMessage(new ABMarkerMessage(AppConfig.myServentInfo,AppConfig.myServentInfo,AppConfig.myServentInfo.getId(),myClockCopy));
+
+                }
+                else
+                    AppConfig.timestampedStandardPrint("Has this message. No rebroadcasting");
+
+            }
+        }
     }
 
     private void rebroadcast() {

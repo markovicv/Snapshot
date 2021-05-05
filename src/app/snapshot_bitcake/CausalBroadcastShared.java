@@ -12,6 +12,8 @@ public class CausalBroadcastShared {
 
     public static Map<Integer,Integer> vectorClock = new ConcurrentHashMap<>();
     public static BlockingQueue<Message> commitedCausalMessages = new LinkedBlockingQueue();
+    public static Set<Message> seenMessages = Collections.newSetFromMap(new ConcurrentHashMap<Message, Boolean>());
+
     public static Queue<Message> pendingMessagesQueue = new ConcurrentLinkedQueue<>();
     public static Object pendingMessagesQueueLock = new Object();
     public static Object causalMessageLock = new Object();
