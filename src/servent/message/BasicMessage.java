@@ -131,6 +131,16 @@ public class BasicMessage implements Message {
 		this.collectorId = id;
 	}
 
+	@Override
+	public BitcakeManager getBitcakeManager() {
+		return bitcakeManager;
+	}
+
+	@Override
+	public void setBitcakeManager(BitcakeManager bitcakeManager) {
+		this.bitcakeManager = bitcakeManager;
+	}
+
 	protected BasicMessage(MessageType type, ServentInfo originalSenderInfo, ServentInfo receiverInfo,
 						   boolean white, List<ServentInfo> routeList, String messageText, int messageId) {
 		this.type = type;
@@ -163,6 +173,11 @@ public class BasicMessage implements Message {
 			toReturn.setAbSnapshot(getABSnapshotResult());
 			toReturn.setCollectorId(getCollectorId());
 		}
+		if(getMessageType()==MessageType.TRANSACTION){
+			toReturn.setMessageText(getMessageText());
+			toReturn.setVectorClock(getVectorClock());
+			toReturn.setBitcakeManager(getBitcakeManager());
+		}
 		
 		return toReturn;
 	}
@@ -185,8 +200,12 @@ public class BasicMessage implements Message {
 				toReturn.setAbSnapshot(getABSnapshotResult());
 				toReturn.setCollectorId(getCollectorId());
 			}
-			if(getMessageType()==MessageType.TRANSACTION)
+			if(getMessageType()==MessageType.TRANSACTION) {
 				toReturn.setMessageText(getMessageText());
+				toReturn.setVectorClock(getVectorClock());
+				toReturn.setBitcakeManager(getBitcakeManager());
+
+			}
 
 			
 			return toReturn;

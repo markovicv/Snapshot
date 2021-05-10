@@ -43,21 +43,18 @@ public class ABMarkerMessageHandler implements MessageHandler {
                 boolean didPut = CausalBroadcastShared.seenMessages.add(clientMessage);
 
                 if(didPut){
-                    CausalBroadcastShared.seenMessages.add(clientMessage);
                     CausalBroadcastShared.addPendingMessages(clientMessage);
                     CausalBroadcastShared.checkPandingMessages();
-//                    CausalBroadcastShared.sendSnapshotResult(snapshotCollector.getBitcakeManager(),snapshotCollector);
 
                     AppConfig.timestampedStandardPrint("Rebroadcasting");
                     Map<Integer,Integer> myClockCopy = clientMessage.getVectorClock();
+
                     for(Integer neighbor:AppConfig.myServentInfo.getNeighbors()){
-//                        clientMessage.setVectorClock(myClockCopy);
                         MessageUtil.sendMessage(clientMessage.changeReceiver(neighbor).makeMeASender());
 
 
                     }
 
-                    CausalBroadcastShared.commitCausalMessage(new ABMarkerMessage(AppConfig.myServentInfo,AppConfig.myServentInfo,AppConfig.myServentInfo.getId(),myClockCopy));
 
                 }
                 else

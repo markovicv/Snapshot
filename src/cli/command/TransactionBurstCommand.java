@@ -36,6 +36,7 @@ public class TransactionBurstCommand implements CLICommand {
 				//TODO transkacija resena
 				Map<Integer,Integer> vectorClockCopy = new ConcurrentHashMap<>(CausalBroadcastShared.getVectorClock());
 				Message transactionMessage = new TransactionMessage(AppConfig.myServentInfo,null,0,bitcakeManager,vectorClockCopy);
+
 				for (int neighbor : AppConfig.myServentInfo.getNeighbors()) {
 					int amount = 1 + (int)(Math.random() * MAX_TRANSFER_AMOUNT);
 

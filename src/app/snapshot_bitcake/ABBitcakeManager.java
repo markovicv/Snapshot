@@ -57,8 +57,6 @@ public class ABBitcakeManager implements BitcakeManager{
         CausalBroadcastShared.commitCausalMessage(abMarkerMessage);
 
 
-//        CausalBroadcastShared.sendSnapshotResult(snapshotCollector.getBitcakeManager(), snapshotCollector);
-
     }
     private void completeGraphSend(Integer neighbor,Map<Integer,Integer> myClockCopy,ServentInfo myInfo){
         Message abMarkerMessage = new ABMarkerMessage(myInfo,AppConfig.getInfoById(neighbor),AppConfig.myServentInfo.getId(),myClockCopy);
@@ -78,22 +76,16 @@ public class ABBitcakeManager implements BitcakeManager{
         if(AppConfig.myServentInfo.getId() == clientMessage.getOriginalSenderInfo().getId())
             snapshotCollector.addAcharyaBadrinathInfo(clientMessage.getOriginalSenderInfo().getId(),snapshotResult);
         else{
-            // bad way, sending message directly to collector
-//            sendMessageToCollector(clientMessage,snapshotResult);
-
             // good way, broadcast snapshot result to neighbors
             broadcastTellMessage(clientMessage,snapshotResult);
         }
 
 
     }
-//    private void sendMessageToCollector(Message clientMessage,ABSnapshotResult snapshotResult){
-//        int collectorId = Integer.parseInt(clientMessage.getMessageText());
-//        Message directMessage = new ABTellDirectlyCollectorMessage(AppConfig.myServentInfo,AppConfig.getInfoById(clientMessage.getOriginalSenderInfo().getId()),snapshotResult);
-//        MessageUtil.sendMessage(directMessage);
-//    }
+
     private void broadcastTellMessage(Message clientMessage,ABSnapshotResult snapshotResult){
         Message abTellMessage = new ABTellMessage(AppConfig.myServentInfo,null,snapshotResult,clientMessage.getOriginalSenderInfo().getId());
+
 
         for(Integer neighbor:AppConfig.myServentInfo.getNeighbors()){
             // TODO kopija napravljena

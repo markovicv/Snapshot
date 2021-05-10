@@ -94,4 +94,5 @@ public class CLIParser implements Runnable, Cancellable {
 		this.working = false;
 		
 	}
+
 }

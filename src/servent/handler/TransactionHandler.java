@@ -2,8 +2,12 @@ package servent.handler;
 
 import app.AppConfig;
 import app.snapshot_bitcake.BitcakeManager;
+import app.snapshot_bitcake.CausalBroadcastShared;
 import servent.message.Message;
 import servent.message.MessageType;
+import servent.message.util.MessageUtil;
+
+import java.util.Map;
 
 public class TransactionHandler implements MessageHandler {
 
@@ -20,21 +24,42 @@ public class TransactionHandler implements MessageHandler {
 	@Override
 	public void run() {
 		if (clientMessage.getMessageType() == MessageType.TRANSACTION) {
-			String amountString = clientMessage.getMessageText();
-			
-			int amountNumber = 0;
-			try {
-				amountNumber = Integer.parseInt(amountString);
-			} catch (NumberFormatException e) {
-				AppConfig.timestampedErrorPrint("Couldn't parse amount: " + amountString);
-				return;
-			}
-			
-			bitcakeManager.addSomeBitcakes(amountNumber);
+			if(clientMessage.getOriginalSenderInfo().getId()!=AppConfig.myServentInfo.getId()){
+				boolean didPut = CausalBroadcastShared.seenMessages.add(clientMessage);
+				if(didPut){
+					CausalBroadcastShared.addPendingMessages(clientMessage);
+					CausalBroadcastShared.checkPandingMessages();
 
-		} else {
+					AppConfig.timestampedStandardPrint("Rebroadcasting");
+					for(Integer neighbor:AppConfig.myServentInfo.getNeighbors()){
+						MessageUtil.sendMessage(clientMessage.changeReceiver(neighbor).makeMeASender());
+
+
+					}
+				}
+				else {
+					AppConfig.timestampedStandardPrint("Seen this transaction");
+				}
+			}
+
+		}
+		else {
 			AppConfig.timestampedErrorPrint("Transaction handler got: " + clientMessage);
 		}
+	}
+	public static void handleTransaction(Message clientMessage){
+		String amountString = clientMessage.getMessageText();
+		BitcakeManager bitcakeManager = clientMessage.getBitcakeManager();
+
+		int amountNumber = 0;
+		try {
+			amountNumber = Integer.parseInt(amountString);
+		} catch (NumberFormatException e) {
+			AppConfig.timestampedErrorPrint("Couldn't parse amount: " + amountString);
+			return;
+		}
+
+		bitcakeManager.addSomeBitcakes(amountNumber);
 	}
 
 }

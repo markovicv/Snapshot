@@ -6,6 +6,7 @@ import java.util.Map;
 
 import app.ServentInfo;
 import app.snapshot_bitcake.ABSnapshotResult;
+import app.snapshot_bitcake.BitcakeManager;
 
 /**
  * This is your basic message. It should cover most needs.
@@ -109,6 +110,9 @@ public interface Message extends Serializable {
 
 
 	void setMessageText(String message);
+
+	BitcakeManager getBitcakeManager();
+	void setBitcakeManager(BitcakeManager bitcakeManager);
 
 	/**
 	 * This method is invoked by the frameworks sender code. It is invoked
