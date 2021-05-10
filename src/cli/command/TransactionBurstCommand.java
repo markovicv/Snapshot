@@ -41,10 +41,8 @@ public class TransactionBurstCommand implements CLICommand {
 
 					transactionMessage.setMessageText(String.valueOf(amount));
 					transactionMessage = transactionMessage.changeReceiver(neighbor);
-
-
-					
 					MessageUtil.sendMessage(transactionMessage);
+
 				}
 				// povecati vector clock posle svake poruke
 				transactionMessage = transactionMessage.changeReceiver(AppConfig.myServentInfo.getId());

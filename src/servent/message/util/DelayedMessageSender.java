@@ -51,6 +51,13 @@ public class DelayedMessageSender implements Runnable {
             oos.flush();
             sendSocket.close();
 
+            /*
+                kada smo poslali poruku komsiji, poveacamo SENTi[j] za vrednost koju saljemo !
+             */
+            synchronized (CausalBroadcastShared.sentLock){
+                CausalBroadcastShared.SENT[messageToSend.getReceiverInfo().getId()] += Integer.parseInt(messageToSend.getMessageText());
+            }
+
             messageToSend.sendEffect();
 
 

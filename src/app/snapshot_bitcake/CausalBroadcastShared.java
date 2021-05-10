@@ -14,6 +14,11 @@ public class CausalBroadcastShared {
     public static BlockingQueue<Message> commitedCausalMessages = new LinkedBlockingQueue();
     public static Set<Message> seenMessages = Collections.newSetFromMap(new ConcurrentHashMap<Message, Boolean>());
 
+    public static int[] SENT = new int[AppConfig.getServentCount()];
+    public static int[] RECD = new int[AppConfig.getServentCount()];
+    public static Object sentLock = new Object();
+    public static Object recdLock = new Object();
+
     public static Queue<Message> pendingMessagesQueue = new ConcurrentLinkedQueue<>();
     public static Object pendingMessagesQueueLock = new Object();
     public static Object causalMessageLock = new Object();
