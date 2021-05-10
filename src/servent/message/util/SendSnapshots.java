@@ -1,10 +1,12 @@
 package servent.message.util;
 
+import app.AppConfig;
 import app.Cancellable;
 import app.snapshot_bitcake.ABBitcakeManager;
 import app.snapshot_bitcake.BitcakeManager;
 import app.snapshot_bitcake.CausalBroadcastShared;
 import app.snapshot_bitcake.SnapshotCollector;
+import servent.handler.TransactionHandler;
 import servent.message.Message;
 import servent.message.MessageType;
 import servent.message.PoisonMessage;
@@ -36,9 +38,14 @@ public class SendSnapshots implements Runnable, Cancellable {
                     ABBitcakeManager abBitcakeManager = (ABBitcakeManager) bitcakeManager;
                     abBitcakeManager.handleMarker(message,snapshotCollector,abBitcakeManager.getCurrentBitcakeAmount());
                 }
+                if(message.getMessageType() == MessageType.TRANSACTION){
+                    if(message.getReceiverInfo().getId() == AppConfig.myServentInfo.getId()){
+                        TransactionHandler.handleTransaction(message);
+                    }
+
+                }
 
 
-//                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

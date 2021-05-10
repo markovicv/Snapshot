@@ -12,4 +12,5 @@ public interface Cancellable {
 	 * Stop executing this worker in a graceful way.
 	 */
 	void stop();
+
 }
