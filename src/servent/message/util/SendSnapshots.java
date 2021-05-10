@@ -11,6 +11,8 @@ import servent.message.Message;
 import servent.message.MessageType;
 import servent.message.PoisonMessage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class SendSnapshots implements Runnable, Cancellable {
@@ -41,6 +43,8 @@ public class SendSnapshots implements Runnable, Cancellable {
                 if(message.getMessageType() == MessageType.TRANSACTION){
                     if(message.getReceiverInfo().getId() == AppConfig.myServentInfo.getId()){
                         TransactionHandler.handleTransaction(message);
+
+
                     }
 
                 }

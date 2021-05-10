@@ -14,15 +14,16 @@ public class CausalBroadcastShared {
     public static BlockingQueue<Message> commitedCausalMessages = new LinkedBlockingQueue();
     public static Set<Message> seenMessages = Collections.newSetFromMap(new ConcurrentHashMap<Message, Boolean>());
 
-    public static int[] SENT = new int[AppConfig.getServentCount()];
-    public static int[] RECD = new int[AppConfig.getServentCount()];
-    public static Object sentLock = new Object();
-    public static Object recdLock = new Object();
-
     public static Queue<Message> pendingMessagesQueue = new ConcurrentLinkedQueue<>();
     public static Object pendingMessagesQueueLock = new Object();
     public static Object causalMessageLock = new Object();
 
+
+    public static Map<Integer,List<Integer>> SENT = new ConcurrentHashMap<>();
+    public static Map<Integer,List<Integer>> RECD = new ConcurrentHashMap<>();
+
+    public static Object sentLock = new Object();
+    public static Object recdLock = new Object();
 
     public static void initVectorClock(int serventCount){
         for(int i=0;i<serventCount;i++){
@@ -61,18 +62,7 @@ public class CausalBroadcastShared {
         return false;
     }
 
-    public static void sendSnapshotResult(BitcakeManager bitcakeManager,SnapshotCollector snapshotCollector){
-        System.out.println("SNAP RESULT ");
-        System.out.println(commitedCausalMessages.size());
-        synchronized (causalMessageLock){
-            for(Message message:commitedCausalMessages){
-                ABBitcakeManager abBitcakeManager = (ABBitcakeManager) bitcakeManager;
-                abBitcakeManager.handleMarker(message,snapshotCollector,abBitcakeManager.getCurrentBitcakeAmount());
-            }
-        }
 
-
-    }
 
     public static void checkPandingMessages(){
         boolean gotWork = true;

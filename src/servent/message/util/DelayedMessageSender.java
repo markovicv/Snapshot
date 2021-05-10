@@ -3,6 +3,8 @@ package servent.message.util;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 import app.AppConfig;
 import app.ServentInfo;
@@ -52,10 +54,13 @@ public class DelayedMessageSender implements Runnable {
             sendSocket.close();
 
             /*
-                kada smo poslali poruku komsiji, poveacamo SENTi[j] za vrednost koju saljemo !
+                SENT logika
              */
             synchronized (CausalBroadcastShared.sentLock){
-                CausalBroadcastShared.SENT[messageToSend.getReceiverInfo().getId()] += Integer.parseInt(messageToSend.getMessageText());
+                int receiverId = messageToSend.getReceiverInfo().getId();
+                List<Integer> sentMessagesList =  CausalBroadcastShared.SENT.getOrDefault(receiverId,new ArrayList<>());
+                sentMessagesList.add(Integer.parseInt(messageToSend.getMessageText()));
+                CausalBroadcastShared.SENT.put(receiverId,sentMessagesList);
             }
 
             messageToSend.sendEffect();

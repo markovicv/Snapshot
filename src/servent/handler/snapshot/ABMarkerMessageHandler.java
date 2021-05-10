@@ -39,7 +39,6 @@ public class ABMarkerMessageHandler implements MessageHandler {
 
             if(clientMessage.getOriginalSenderInfo().getId() != AppConfig.myServentInfo.getId()){
 
-                // TODO uradjen konkurentan set za Causal
                 boolean didPut = CausalBroadcastShared.seenMessages.add(clientMessage);
 
                 if(didPut){
@@ -47,7 +46,6 @@ public class ABMarkerMessageHandler implements MessageHandler {
                     CausalBroadcastShared.checkPandingMessages();
 
                     AppConfig.timestampedStandardPrint("Rebroadcasting");
-                    Map<Integer,Integer> myClockCopy = clientMessage.getVectorClock();
 
                     for(Integer neighbor:AppConfig.myServentInfo.getNeighbors()){
                         MessageUtil.sendMessage(clientMessage.changeReceiver(neighbor).makeMeASender());

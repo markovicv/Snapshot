@@ -124,6 +124,30 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
                         AppConfig.timestampedStandardPrint(
                                 "Recorded bitcake amount for " + entry.getKey() + " = " + entry.getValue().getRecordedAmount());
                     }
+
+                    for(int i=0; i<AppConfig.getServentCount();i++){
+                        for(int j=0;j<AppConfig.getServentCount();j++){
+                            if(i!=j){
+                                if(AppConfig.getInfoById(i).getNeighbors().contains(j)){
+                                    /*
+                                        uzmi sve poruke koje sam poslao j
+                                     */
+                                    int iSentMsgsSize = collectedABValues.get(i).getSEND().get(j).size();
+                                    /*
+                                        uzmi sve poruke koje sam primio od i
+                                     */
+                                    int jRecdMsgsSize = collectedABValues.get(j).getRECD().get(i).size();
+
+                                    for(int k=jRecdMsgsSize+1;k<=iSentMsgsSize;k++){
+                                        int amount = collectedABValues.get(i).getSEND().get(i).get(k);
+                                        sum+=amount;
+                                        AppConfig.timestampedStandardPrint("canal msg from "+i+" to "+j+" : "+ amount);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     AppConfig.timestampedStandardPrint("System bitcake count: " + sum);
                     collectedABValues.clear();
                     break;

@@ -7,6 +7,8 @@ import servent.message.Message;
 import servent.message.MessageType;
 import servent.message.util.MessageUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class TransactionHandler implements MessageHandler {
@@ -29,6 +31,8 @@ public class TransactionHandler implements MessageHandler {
 				if(didPut){
 					CausalBroadcastShared.addPendingMessages(clientMessage);
 					CausalBroadcastShared.checkPandingMessages();
+
+
 
 					AppConfig.timestampedStandardPrint("Rebroadcasting");
 					for(Integer neighbor:AppConfig.myServentInfo.getNeighbors()){
@@ -60,6 +64,13 @@ public class TransactionHandler implements MessageHandler {
 		}
 
 		bitcakeManager.addSomeBitcakes(amountNumber);
+
+		synchronized (CausalBroadcastShared.recdLock){
+			int senderId = clientMessage.getOriginalSenderInfo().getId();
+			List<Integer> receivedListMessages = CausalBroadcastShared.RECD.getOrDefault(senderId,new ArrayList<>());
+			receivedListMessages.add(Integer.parseInt(clientMessage.getMessageText()));
+			CausalBroadcastShared.RECD.put(senderId,receivedListMessages);
+		}
 	}
 
 }

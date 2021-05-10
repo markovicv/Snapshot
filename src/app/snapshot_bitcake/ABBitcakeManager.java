@@ -72,7 +72,7 @@ public class ABBitcakeManager implements BitcakeManager{
     public void handleMarker(Message clientMessage,SnapshotCollector snapshotCollector,int currentBitcake){
 
 
-        ABSnapshotResult snapshotResult = new ABSnapshotResult(AppConfig.myServentInfo.getId(),currentBitcake);
+        ABSnapshotResult snapshotResult = new ABSnapshotResult(AppConfig.myServentInfo.getId(),currentBitcake,CausalBroadcastShared.SENT,CausalBroadcastShared.RECD);
         if(AppConfig.myServentInfo.getId() == clientMessage.getOriginalSenderInfo().getId())
             snapshotCollector.addAcharyaBadrinathInfo(clientMessage.getOriginalSenderInfo().getId(),snapshotResult);
         else{
