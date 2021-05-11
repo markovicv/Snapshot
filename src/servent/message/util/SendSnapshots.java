@@ -4,6 +4,7 @@ import app.AppConfig;
 import app.Cancellable;
 import app.snapshot_bitcake.*;
 import servent.handler.TransactionHandler;
+import servent.handler.snapshot.ABTellMessageHandler;
 import servent.message.Message;
 import servent.message.MessageType;
 import servent.message.PoisonMessage;
@@ -32,8 +33,11 @@ public class SendSnapshots implements Runnable, Cancellable {
 
             try {
                 Message message = CausalBroadcastShared.commitedCausalMessages.take();
+
+
                 if(message.getMessageType()==MessageType.POISON)
                     break;
+
                 if(message.getMessageType()==MessageType.AB_MARKER){
                     ABBitcakeManager abBitcakeManager = (ABBitcakeManager) bitcakeManager;
                     abBitcakeManager.handleMarker(message,snapshotCollector,abBitcakeManager.getCurrentBitcakeAmount());
@@ -44,6 +48,7 @@ public class SendSnapshots implements Runnable, Cancellable {
                     }
 
                 }
+
                 if(message.getMessageType() == MessageType.AV_MARKER){
                     CausalBroadcastShared.avMarkerMessage = (AVMarkerMessage) message;
                     AVBitcakeManager avBitcakeManager = (AVBitcakeManager)bitcakeManager;

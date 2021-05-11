@@ -84,6 +84,9 @@ public class ABBitcakeManager implements BitcakeManager{
     }
 
     private void broadcastTellMessage(Message clientMessage,ABSnapshotResult snapshotResult){
+
+
+
         Message abTellMessage = new ABTellMessage(AppConfig.myServentInfo,null,snapshotResult,clientMessage.getOriginalSenderInfo().getId());
 
 
@@ -92,6 +95,7 @@ public class ABBitcakeManager implements BitcakeManager{
             abTellMessage = abTellMessage.changeReceiver(neighbor);
             MessageUtil.sendMessage(abTellMessage);
         }
+
     }
 
 }

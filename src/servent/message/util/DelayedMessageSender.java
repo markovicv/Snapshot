@@ -23,6 +23,7 @@ import servent.message.snapshot.ABMarkerMessage;
 public class DelayedMessageSender implements Runnable {
 
     private Message messageToSend;
+    private static int counter = 0;
 
     public DelayedMessageSender(Message messageToSend) {
         this.messageToSend = messageToSend;
@@ -37,32 +38,34 @@ public class DelayedMessageSender implements Runnable {
             e1.printStackTrace();
         }
 
-
+        ServentInfo receiverInfo = messageToSend.getReceiverInfo();
         if (MessageUtil.MESSAGE_UTIL_PRINTING) {
             AppConfig.timestampedStandardPrint("Sending message " + messageToSend);
         }
 
+
         try {
 
-
-
-            Socket sendSocket = new Socket(messageToSend.getReceiverInfo().getIpAddress(), messageToSend.getReceiverInfo().getListenerPort());
-
+            Socket sendSocket = new Socket(receiverInfo.getIpAddress(), receiverInfo.getListenerPort());
             ObjectOutputStream oos = new ObjectOutputStream(sendSocket.getOutputStream());
-            System.out.println(messageToSend);
             oos.writeObject(messageToSend);
             oos.flush();
             sendSocket.close();
 
+
+
             /*
                 SENT logika, za AB algoritam
              */
-            if(AppConfig.SNAPSHOT_TYPE == SnapshotType.AB){
-                synchronized (CausalBroadcastShared.sentLock){
-                    int receiverId = messageToSend.getReceiverInfo().getId();
-                    List<Integer> sentMessagesList =  CausalBroadcastShared.SENT.getOrDefault(receiverId,new ArrayList<>());
-                    sentMessagesList.add(Integer.parseInt(messageToSend.getMessageText()));
-                    CausalBroadcastShared.SENT.put(receiverId,sentMessagesList);
+            if (AppConfig.SNAPSHOT_TYPE == SnapshotType.AB) {
+                synchronized (CausalBroadcastShared.sentLock) {
+                    if (messageToSend.getMessageType() == MessageType.TRANSACTION) {
+                        int receiverId = messageToSend.getReceiverInfo().getId();
+                        List<Integer> sentMessagesList = CausalBroadcastShared.SENT.getOrDefault(receiverId, new ArrayList<>());
+                        sentMessagesList.add(Integer.parseInt(messageToSend.getMessageText()));
+                        CausalBroadcastShared.SENT.put(receiverId, sentMessagesList);
+                    }
+
                 }
             }
             /*
@@ -81,9 +84,13 @@ public class DelayedMessageSender implements Runnable {
 
 //			}
         } catch (IOException e) {
+            System.err.println("IP: " + messageToSend.getReceiverInfo().getIpAddress() + " : " + messageToSend.getReceiverInfo().getListenerPort());
             AppConfig.timestampedErrorPrint("Couldn't send message: " + messageToSend.toString());
-//            AppConfig.timestampedErrorPrint("Couldn't send message: " + messageToSend.getRoute());
-            AppConfig.timestampedErrorPrint(e.getMessage());
+            AppConfig.timestampedErrorPrint("counter: "+counter+" : "+e.getMessage());
+
+
         }
+        counter++;
+
     }
 }

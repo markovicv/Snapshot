@@ -1,6 +1,7 @@
 package servent.handler.snapshot;
 
 import app.AppConfig;
+import app.snapshot_bitcake.CausalBroadcastShared;
 import app.snapshot_bitcake.SnapshotCollector;
 import servent.handler.MessageHandler;
 import servent.message.Message;
@@ -24,8 +25,9 @@ public class ABTellMessageHandler implements MessageHandler {
 
     @Override
     public void run() {
-        if(clientMessage.getMessageType() == MessageType.AB_TELL){
-            // TODO napravljen konkurentni set MessageHandler
+        if (clientMessage.getMessageType() == MessageType.AB_TELL) {
+
+
 
             boolean didPut = AppConfig.seen.add(clientMessage);
 
@@ -46,7 +48,8 @@ public class ABTellMessageHandler implements MessageHandler {
                 AppConfig.timestampedStandardPrint("Dont rebroadcast, seen this message");
             }
 
-
         }
     }
+
+
 }

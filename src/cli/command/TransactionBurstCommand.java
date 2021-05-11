@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class TransactionBurstCommand implements CLICommand {
 
 	private static final int TRANSACTION_COUNT = 5;
-	private static final int BURST_WORKERS = 10;
+	private static final int BURST_WORKERS = 1;
 	private static final int MAX_TRANSFER_AMOUNT = 10;
 	
 
@@ -29,6 +29,7 @@ public class TransactionBurstCommand implements CLICommand {
 		
 		@Override
 		public void run() {
+
 			for (int i = 0; i < TRANSACTION_COUNT; i++) {
 				//TODO transkacija resena
 				Map<Integer,Integer> vectorClockCopy = new ConcurrentHashMap<>(CausalBroadcastShared.getVectorClock());
@@ -44,6 +45,7 @@ public class TransactionBurstCommand implements CLICommand {
 				}
 				// povecati vector clock posle svake poruke
 				transactionMessage = transactionMessage.changeReceiver(AppConfig.myServentInfo.getId());
+//				CausalBroadcastShared.initVectorClock(AppConfig.myServentInfo.getId());
 				CausalBroadcastShared.commitCausalMessage(transactionMessage);
 			}
 		}

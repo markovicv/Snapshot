@@ -55,7 +55,7 @@ public class CausalBroadcastShared {
     public static void commitCausalMessage(Message causalMessage){
         commitedCausalMessages.add(causalMessage);
         incrementClock(causalMessage.getOriginalSenderInfo().getId());
-        AppConfig.isAVMarkerSent.set(true);
+
         checkPandingMessages();
     }
 

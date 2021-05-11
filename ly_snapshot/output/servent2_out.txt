@@ -1,349 +1,40 @@
 ab
-13:44:08 - Starting servent [2|localhost|1300]
-13:44:08 - Pausing for 15000 ms
-13:44:11 - Got message [3|1||AB_TELL|2]
-13:44:12 - Got message [6|2||AB_TELL|2]
-13:44:12 - Got message [4|0|4|AB_MARKER|2]
-13:44:12 - DOSO marker
+00:52:34 - Starting servent [2|localhost|1300]
+00:52:34 - Pausing for 1100 ms
+00:52:35 - Stopping...
 vrtim se u petlji
-AB_MARKER
+vrtim se u petlji
+vrtim se u petlji
+vrtim se u petlji
+vrtim se u petlji
+00:52:36 - Got message [0|1|2|TRANSACTION|2]
+vrtim se u petlji
+TRANSACTION
 vrtim se unutra 
+{0=0, 1=0, 2=5, 3=0, 4=0, 5=0, 6=0}
 {0=0, 1=0, 2=0, 3=0, 4=0, 5=0, 6=0}
-{0=0, 1=0, 2=0, 3=0, 4=0, 5=0, 6=0}
-13:44:12 - Commiting [4|0|4|AB_MARKER|2]
+00:52:36 - Commiting [0|1|2|TRANSACTION|2]
 vrtim se u petlji
-13:44:12 - Rebroadcasting
-vrtim se u petlji
-UBACIO JE :::: 2 kolicina ::::1000
-13:44:12 - Got message [4|0|4|AB_MARKER|2]
-13:44:12 - DOSO marker
-13:44:12 - Has this message. No rebroadcasting
-13:44:12 - Sending message [3|1||AB_TELL|6]
-[3|1||AB_TELL|6]
-13:44:12 - Got message [1|3||AB_TELL|2]
-13:44:12 - Sending message [3|1||AB_TELL|3]
-[3|1||AB_TELL|3]
-13:44:12 - Got message [4|0|4|AB_MARKER|2]
-13:44:12 - DOSO marker
-13:44:12 - Has this message. No rebroadcasting
-13:44:12 - Got message [3|0||AB_TELL|2]
-13:44:12 - Got message [3|0||AB_TELL|2]
-13:44:12 - seen this message
-13:44:12 - Sending message [6|2||AB_TELL|6]
-[6|2||AB_TELL|6]
-13:44:12 - Sending message [3|1||AB_TELL|0]
-[3|1||AB_TELL|0]
-13:44:12 - Got message [3|0||AB_TELL|2]
-13:44:12 - seen this message
-13:44:12 - Got message [5|2||AB_TELL|2]
-13:44:12 - Sending message [3|1||AB_TELL|1]
-[3|1||AB_TELL|1]
-13:44:12 - Sending message [1|3||AB_TELL|3]
-[1|3||AB_TELL|3]
-13:44:12 - Sending message [4|0|4|AB_MARKER|3]
-[4|0|4|AB_MARKER|3]
-13:44:13 - Sending message [4|0|4|AB_MARKER|0]
-[4|0|4|AB_MARKER|0]
-13:44:13 - Sending message [4|0|4|AB_MARKER|6]
-[4|0|4|AB_MARKER|6]
-13:44:13 - Sending message [1|3||AB_TELL|6]
-[1|3||AB_TELL|6]
-13:44:13 - Sending message [6|2||AB_TELL|0]
-[6|2||AB_TELL|0]
-13:44:13 - Got message [3|3||AB_TELL|2]
-13:44:13 - Sending message [6|2||AB_TELL|1]
-[6|2||AB_TELL|1]
-13:44:13 - Got message [5|0||AB_TELL|2]
-13:44:13 - Sending message [3|0||AB_TELL|6]
-[3|0||AB_TELL|6]
-13:44:13 - Sending message [3|0||AB_TELL|1]
-[3|0||AB_TELL|1]
-13:44:13 - Got message [1|1||AB_TELL|2]
-13:44:13 - Got message [3|1||AB_TELL|2]
-13:44:13 - seen this message
-13:44:13 - Got message [3|0||AB_TELL|2]
-13:44:13 - seen this message
-13:44:13 - Sending message [2|0||AB_TELL|0]
-[2|0||AB_TELL|0]
-13:44:13 - Got message [5|2||AB_TELL|2]
-13:44:13 - seen this message
-13:44:13 - Sending message [6|2||AB_TELL|3]
-[6|2||AB_TELL|3]
-13:44:13 - Sending message [4|0|4|AB_MARKER|1]
-[4|0|4|AB_MARKER|1]
-13:44:13 - Sending message [2|1||AB_TELL|3]
-[2|1||AB_TELL|3]
-13:44:13 - Got message [3|1||AB_TELL|2]
-13:44:13 - Sending message [2|2||AB_TELL|1]
-13:44:13 - seen this message
-[2|2||AB_TELL|1]
-13:44:13 - Got message [6|3||AB_TELL|2]
-13:44:13 - Got message [3|3||AB_TELL|2]
-13:44:13 - seen this message
-13:44:13 - Sending message [2|3||AB_TELL|6]
-[2|3||AB_TELL|6]
-13:44:13 - Got message [6|1||AB_TELL|2]
-13:44:13 - Got message [3|1||AB_TELL|2]
-13:44:13 - seen this message
-13:44:13 - Got message [1|3||AB_TELL|2]
-13:44:13 - seen this message
-13:44:13 - Got message [3|1||AB_TELL|2]
-13:44:13 - seen this message
-13:44:13 - Got message [6|4||AB_TELL|2]
-13:44:13 - Sending message [3|0||AB_TELL|3]
-[3|0||AB_TELL|3]
-13:44:13 - Got message [0|1||AB_TELL|2]
-13:44:13 - Got message [1|1||AB_TELL|2]
-13:44:13 - seen this message
-13:44:13 - Got message [1|2||AB_TELL|2]
-13:44:13 - Got message [3|3||AB_TELL|2]
-13:44:13 - seen this message
-13:44:13 - Sending message [1|3||AB_TELL|1]
-[1|3||AB_TELL|1]
-13:44:13 - Got message [6|2||AB_TELL|2]
-13:44:13 - seen this message
-13:44:13 - Sending message [1|3||AB_TELL|0]
-[1|3||AB_TELL|0]
-13:44:13 - Sending message [3|0||AB_TELL|0]
-[3|0||AB_TELL|0]
-13:44:13 - Got message [5|0||AB_TELL|2]
-13:44:13 - seen this message
-13:44:13 - Sending message [3|3||AB_TELL|0]
-[3|3||AB_TELL|0]
-13:44:13 - Sending message [3|3||AB_TELL|3]
-[3|3||AB_TELL|3]
-13:44:13 - Sending message [6|3||AB_TELL|0]
-[6|3||AB_TELL|0]
-13:44:13 - Got message [6|2||AB_TELL|2]
-13:44:13 - seen this message
-13:44:14 - Got message [1|4||AB_TELL|2]
-13:44:14 - Sending message [5|2||AB_TELL|3]
-[5|2||AB_TELL|3]
-13:44:14 - Sending message [5|0||AB_TELL|3]
-[5|0||AB_TELL|3]
-13:44:14 - Sending message [5|0||AB_TELL|1]
-[5|0||AB_TELL|1]
-13:44:14 - Got message [6|2||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Sending message [1|1||AB_TELL|1]
-[1|1||AB_TELL|1]
-13:44:14 - Sending message [5|2||AB_TELL|6]
-[5|2||AB_TELL|6]
-13:44:14 - Sending message [5|0||AB_TELL|0]
-[5|0||AB_TELL|0]
-13:44:14 - Got message [4|0|4|AB_MARKER|2]
-13:44:14 - DOSO marker
-13:44:14 - Has this message. No rebroadcasting
-13:44:14 - Got message [6|4||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Sending message [1|1||AB_TELL|3]
-[1|1||AB_TELL|3]
-13:44:14 - Got message [6|4||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Sending message [5|0||AB_TELL|6]
-[5|0||AB_TELL|6]
-13:44:14 - Got message [5|2||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Sending message [5|2||AB_TELL|0]
-[5|2||AB_TELL|0]
-13:44:14 - Got message [5|0||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Got message [1|3||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Sending message [1|2||AB_TELL|6]
-[1|2||AB_TELL|6]
-13:44:14 - Sending message [5|2||AB_TELL|1]
-[5|2||AB_TELL|1]
-13:44:14 - Got message [6|2||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Sending message [1|1||AB_TELL|0]
-[1|1||AB_TELL|0]
-13:44:14 - Sending message [6|4||AB_TELL|3]
-[6|4||AB_TELL|3]
-13:44:14 - Got message [5|0||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Sending message [6|3||AB_TELL|3]
-[6|3||AB_TELL|3]
-13:44:14 - Sending message [3|3||AB_TELL|1]
-[3|3||AB_TELL|1]
-13:44:14 - Got message [2|1||AB_TELL|2]
-13:44:14 - Got message [5|2||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Sending message [3|3||AB_TELL|6]
-[3|3||AB_TELL|6]
-13:44:14 - Got message [1|4||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Got message [1|2||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Got message [6|3||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Sending message [6|1||AB_TELL|6]
-13:44:14 - Sending message [1|4||AB_TELL|0]
-[1|4||AB_TELL|0]
-[6|1||AB_TELL|6]
-13:44:14 - Got message [0|0||AB_TELL|2]
-13:44:14 - Got message [2|0||AB_TELL|2]
-13:44:14 - Sending message [6|1||AB_TELL|1]
-[6|1||AB_TELL|1]
-13:44:14 - Got message [2|1||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Got message [1|4||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Got message [2|3||AB_TELL|2]
-13:44:14 - Got message [1|1||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Sending message [1|1||AB_TELL|6]
-[1|1||AB_TELL|6]
-13:44:14 - Sending message [1|4||AB_TELL|1]
-[1|4||AB_TELL|1]
-13:44:14 - Got message [2|2||AB_TELL|2]
-13:44:14 - Sending message [6|1||AB_TELL|3]
-[6|1||AB_TELL|3]
-13:44:14 - Sending message [6|3||AB_TELL|6]
-[6|3||AB_TELL|6]
-13:44:14 - Got message [2|2||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Got message [1|3||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Sending message [6|3||AB_TELL|1]
-[6|3||AB_TELL|1]
-13:44:14 - Sending message [1|2||AB_TELL|1]
-[1|2||AB_TELL|1]
-13:44:14 - Got message [6|3||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Got message [1|3||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Got message [3|3||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Sending message [0|1||AB_TELL|6]
-[0|1||AB_TELL|6]
-13:44:14 - Got message [6|4||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Got message [1|2||AB_TELL|2]
-13:44:14 - seen this message
-13:44:14 - Sending message [1|4||AB_TELL|3]
-[1|4||AB_TELL|3]
-13:44:14 - Sending message [6|1||AB_TELL|0]
-[6|1||AB_TELL|0]
-13:44:15 - Sending message [0|1||AB_TELL|0]
-[0|1||AB_TELL|0]
-13:44:15 - Got message [6|1||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Sending message [2|1||AB_TELL|0]
-[2|1||AB_TELL|0]
-13:44:15 - Sending message [1|2||AB_TELL|3]
-[1|2||AB_TELL|3]
-13:44:15 - Sending message [0|1||AB_TELL|1]
-[0|1||AB_TELL|1]
-13:44:15 - Got message [0|0||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Sending message [6|4||AB_TELL|6]
-[6|4||AB_TELL|6]
-13:44:15 - Got message [2|0||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Sending message [2|1||AB_TELL|6]
-[2|1||AB_TELL|6]
-13:44:15 - Sending message [6|4||AB_TELL|1]
-[6|4||AB_TELL|1]
-13:44:15 - Got message [0|2||AB_TELL|2]
-13:44:15 - Sending message [1|2||AB_TELL|0]
-[1|2||AB_TELL|0]
-13:44:15 - Sending message [0|1||AB_TELL|3]
-[0|1||AB_TELL|3]
-13:44:15 - Got message [1|4||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Sending message [6|4||AB_TELL|0]
-[6|4||AB_TELL|0]
-13:44:15 - Sending message [2|0||AB_TELL|6]
-[2|0||AB_TELL|6]
-13:44:15 - Sending message [2|0||AB_TELL|1]
-[2|0||AB_TELL|1]
-13:44:15 - Sending message [2|2||AB_TELL|0]
-[2|2||AB_TELL|0]
-13:44:15 - Sending message [1|4||AB_TELL|6]
-[1|4||AB_TELL|6]
-13:44:15 - Got message [2|3||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Got message [6|1||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Got message [2|0||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Sending message [2|1||AB_TELL|1]
-[2|1||AB_TELL|1]
-13:44:15 - Got message [1|1||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Sending message [2|0||AB_TELL|0]
-[2|0||AB_TELL|0]
-13:44:15 - Got message [0|1||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Got message [2|1||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Sending message [2|3||AB_TELL|3]
-[2|3||AB_TELL|3]
-13:44:15 - Got message [0|2||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Sending message [2|3||AB_TELL|1]
-[2|3||AB_TELL|1]
-13:44:15 - Got message [1|2||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Sending message [2|2||AB_TELL|3]
-[2|2||AB_TELL|3]
-13:44:15 - Got message [2|2||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Sending message [2|2||AB_TELL|6]
-[2|2||AB_TELL|6]
-13:44:15 - Got message [2|1||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Sending message [0|0||AB_TELL|1]
-[0|0||AB_TELL|1]
-13:44:15 - Sending message [0|2||AB_TELL|3]
-[0|2||AB_TELL|3]
-13:44:15 - Got message [2|0||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Got message [0|1||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Sending message [2|1||AB_TELL|3]
-[2|1||AB_TELL|3]
-13:44:15 - Sending message [0|0||AB_TELL|6]
-[0|0||AB_TELL|6]
-13:44:15 - Got message [6|3||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Sending message [0|2||AB_TELL|1]
-[0|2||AB_TELL|1]
-13:44:15 - Sending message [2|3||AB_TELL|6]
-[2|3||AB_TELL|6]
-13:44:15 - Got message [2|3||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Sending message [0|2||AB_TELL|6]
-[0|2||AB_TELL|6]
-13:44:15 - Sending message [0|0||AB_TELL|0]
-[0|0||AB_TELL|0]
-13:44:15 - Sending message [2|3||AB_TELL|0]
-[2|3||AB_TELL|0]
-13:44:15 - Got message [0|2||AB_TELL|2]
-13:44:15 - seen this message
-13:44:15 - Got message [6|1||AB_TELL|2]
-13:44:15 - seen this message
-13:44:16 - Sending message [0|2||AB_TELL|0]
-[0|2||AB_TELL|0]
-13:44:16 - Sending message [0|0||AB_TELL|3]
-[0|0||AB_TELL|3]
-13:44:16 - Got message [0|0||AB_TELL|2]
-13:44:16 - seen this message
-13:44:16 - Got message [0|1||AB_TELL|2]
-13:44:16 - seen this message
-13:44:16 - Sending message [2|0||AB_TELL|3]
-[2|0||AB_TELL|3]
-13:44:16 - Sending message [2|2||AB_TELL|1]
-[2|2||AB_TELL|1]
-13:44:16 - Got message [2|3||AB_TELL|2]
-13:44:16 - seen this message
-13:44:16 - Got message [0|1||AB_TELL|2]
-13:44:16 - seen this message
-13:44:16 - Got message [0|2||AB_TELL|2]
-13:44:16 - seen this message
-13:44:16 - Got message [0|0||AB_TELL|2]
-13:44:16 - seen this message
-13:44:16 - Got message [2|2||AB_TELL|2]
-13:44:16 - seen this message
-13:44:23 - Stopping...
+00:52:36 - Rebroadcasting
+00:52:36 - Sending message [2|2|3|TRANSACTION|1]
+00:52:36 - Sending message [2|4|9|TRANSACTION|6]
+00:52:36 - Sending message [2|2|7|TRANSACTION|0]
+00:52:36 - Sending message [2|5|4|TRANSACTION|6]
+00:52:36 - Sending message [2|0|9|TRANSACTION|3]
+00:52:36 - Sending message [2|4|3|TRANSACTION|0]
+00:52:36 - Sending message [2|0|4|TRANSACTION|1]
+00:52:36 - Sending message [2|3|7|TRANSACTION|6]
+00:52:36 - Sending message [2|5|7|TRANSACTION|3]
+00:52:36 - Sending message [2|2|6|TRANSACTION|3]
+00:52:36 - Sending message [2|4|3|TRANSACTION|3]
+00:52:36 - Sending message [2|3|7|TRANSACTION|1]
+00:52:36 - Sending message [2|3|8|TRANSACTION|0]
+00:52:36 - Sending message [2|5|4|TRANSACTION|1]
+00:52:36 - Sending message [0|1|2|TRANSACTION|6]
+00:52:36 - Sending message [2|5|9|TRANSACTION|0]
+00:52:36 - Sending message [2|0|4|TRANSACTION|6]
+00:52:36 - Sending message [2|0|2|TRANSACTION|0]
+00:52:36 - Sending message [2|2|3|TRANSACTION|6]
+00:52:36 - Sending message [0|1|2|TRANSACTION|1]
+00:52:36 - Sending message [2|3|1|TRANSACTION|3]
+00:52:37 - Sending message [2|4|9|TRANSACTION|1]

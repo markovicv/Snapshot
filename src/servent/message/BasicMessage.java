@@ -184,6 +184,9 @@ public class BasicMessage implements Message {
 
 		if(getMessageType() == MessageType.AB_MARKER)
 			toReturn.setVectorClock(getVectorClock());
+
+
+
 		if(getMessageType()==MessageType.AB_TELL){
 			toReturn.setAbSnapshot(getABSnapshotResult());
 			toReturn.setCollectorId(getCollectorId());
@@ -200,6 +203,7 @@ public class BasicMessage implements Message {
 		if(getMessageType() == MessageType.DONE){
 			toReturn.setCollectorId(getCollectorId());
 		}
+
 		
 		return toReturn;
 	}
@@ -210,11 +214,13 @@ public class BasicMessage implements Message {
 	 */
 	@Override
 	public Message changeReceiver(Integer newReceiverId) {
-		if (AppConfig.myServentInfo.getNeighbors().contains(newReceiverId)) {
+		if (AppConfig.myServentInfo.getNeighbors().contains(newReceiverId) || AppConfig.myServentInfo.getId() == newReceiverId) {
 			ServentInfo newReceiverInfo = AppConfig.getInfoById(newReceiverId);
 			
 			Message toReturn = new BasicMessage(getMessageType(), getOriginalSenderInfo(),
 					newReceiverInfo, isWhite(), getRoute(), getMessageText(), getMessageId());
+
+
 			if(getMessageType() == MessageType.AB_MARKER) {
 				toReturn.setVectorClock(getVectorClock());
 			}
@@ -234,6 +240,7 @@ public class BasicMessage implements Message {
 			if(getMessageType() == MessageType.DONE){
 				toReturn.setCollectorId(getCollectorId());
 			}
+
 
 			
 			return toReturn;

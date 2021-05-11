@@ -64,6 +64,8 @@ public class AppConfig {
 
     public static AVSnapshotResult avSnapshotResult;
 
+    public static final Object TEST_LOCK = new Object();
+
     /**
      * Print a message to stdout with a timestamp
      *

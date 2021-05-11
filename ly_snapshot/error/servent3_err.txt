@@ -1,20 +1,228 @@
-13:44:11 - my id: 3 originalSender: 4
-13:44:12 - my id: 3 originalSender: 4
-13:44:12 - my id: 3 originalSender: 4
-13:44:12 - my id: 3 originalSender: 4
-13:44:12 - my id: 3 originalSender: 4
-13:44:12 - my id: 3 originalSender: 4
-13:44:13 - my id: 3 originalSender: 4
-13:44:13 - my id: 3 originalSender: 4
-13:44:13 - my id: 3 originalSender: 4
-13:44:13 - my id: 3 originalSender: 4
-13:44:13 - my id: 3 originalSender: 4
-13:44:14 - my id: 3 originalSender: 4
-13:44:14 - my id: 3 originalSender: 4
-13:44:14 - my id: 3 originalSender: 4
-13:44:14 - my id: 3 originalSender: 4
-13:44:14 - my id: 3 originalSender: 4
-13:44:14 - my id: 3 originalSender: 4
-13:44:14 - my id: 3 originalSender: 4
-13:44:15 - my id: 3 originalSender: 4
-13:44:15 - my id: 3 originalSender: 4
+IP: localhost : 1300
+00:52:37 - Couldn't send message: [2|0|9|TRANSACTION|2]
+00:52:37 - counter: 4 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:37 - Couldn't send message: [1|4|3|TRANSACTION|2]
+00:52:37 - counter: 9 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:37 - Couldn't send message: [2|0|9|TRANSACTION|6]
+00:52:37 - counter: 10 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:37 - Couldn't send message: [6|1|7|TRANSACTION|2]
+00:52:37 - counter: 11 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:37 - Couldn't send message: [6|5|7|TRANSACTION|2]
+00:52:37 - counter: 12 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:37 - Couldn't send message: [6|3|1|TRANSACTION|1]
+00:52:37 - counter: 14 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:37 - Couldn't send message: [6|3|1|TRANSACTION|6]
+00:52:37 - counter: 15 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:37 - Couldn't send message: [6|2|9|TRANSACTION|1]
+00:52:37 - counter: 16 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:37 - Couldn't send message: [2|2|6|TRANSACTION|2]
+00:52:37 - counter: 17 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:37 - Couldn't send message: [6|3|1|TRANSACTION|2]
+00:52:37 - counter: 20 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:37 - Couldn't send message: [6|2|9|TRANSACTION|6]
+00:52:37 - counter: 21 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:37 - Couldn't send message: [1|3|10|TRANSACTION|6]
+00:52:37 - counter: 22 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:37 - Couldn't send message: [6|4|6|TRANSACTION|6]
+00:52:37 - counter: 23 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:37 - Couldn't send message: [6|1|7|TRANSACTION|6]
+00:52:37 - counter: 24 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:37 - Couldn't send message: [6|4|6|TRANSACTION|1]
+00:52:37 - counter: 27 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:37 - Couldn't send message: [2|3|1|TRANSACTION|2]
+00:52:37 - counter: 28 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:37 - Couldn't send message: [2|5|7|TRANSACTION|6]
+00:52:37 - counter: 30 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:37 - Couldn't send message: [2|4|3|TRANSACTION|6]
+00:52:37 - counter: 32 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:37 - Couldn't send message: [6|4|6|TRANSACTION|2]
+00:52:37 - counter: 33 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:37 - Couldn't send message: [2|4|3|TRANSACTION|2]
+00:52:37 - counter: 34 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:37 - Couldn't send message: [5|2|9|TRANSACTION|6]
+00:52:37 - counter: 35 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:37 - Couldn't send message: [1|3|10|TRANSACTION|2]
+00:52:37 - counter: 36 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:37 - Couldn't send message: [2|3|1|TRANSACTION|1]
+00:52:37 - counter: 37 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:37 - Couldn't send message: [1|3|10|TRANSACTION|1]
+00:52:37 - counter: 39 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:37 - Couldn't send message: [5|4|7|TRANSACTION|6]
+00:52:37 - counter: 43 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:37 - Couldn't send message: [6|1|7|TRANSACTION|1]
+00:52:37 - counter: 44 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:37 - Couldn't send message: [5|4|7|TRANSACTION|1]
+00:52:37 - counter: 45 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:37 - Couldn't send message: [2|0|9|TRANSACTION|1]
+00:52:37 - counter: 46 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:37 - Couldn't send message: [2|5|7|TRANSACTION|1]
+00:52:37 - counter: 47 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:37 - Couldn't send message: [1|2|7|TRANSACTION|6]
+00:52:37 - counter: 48 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:37 - Couldn't send message: [5|0|2|TRANSACTION|1]
+00:52:37 - counter: 49 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:37 - Couldn't send message: [2|2|6|TRANSACTION|6]
+00:52:37 - counter: 50 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:37 - Couldn't send message: [1|4|3|TRANSACTION|6]
+00:52:37 - counter: 51 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:37 - Couldn't send message: [2|5|7|TRANSACTION|2]
+00:52:37 - counter: 53 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:37 - Couldn't send message: [5|4|7|TRANSACTION|2]
+00:52:37 - counter: 54 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:37 - Couldn't send message: [2|2|6|TRANSACTION|1]
+00:52:37 - counter: 55 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:37 - Couldn't send message: [1|5|10|TRANSACTION|1]
+00:52:37 - counter: 56 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:38 - Couldn't send message: [1|5|10|TRANSACTION|2]
+00:52:38 - counter: 57 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:38 - Couldn't send message: [1|0|9|TRANSACTION|2]
+00:52:38 - counter: 58 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:38 - Couldn't send message: [1|0|9|TRANSACTION|6]
+00:52:38 - counter: 60 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:38 - Couldn't send message: [2|3|1|TRANSACTION|6]
+00:52:38 - counter: 62 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:38 - Couldn't send message: [5|5|8|TRANSACTION|2]
+00:52:38 - counter: 63 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:38 - Couldn't send message: [5|0|2|TRANSACTION|6]
+00:52:38 - counter: 65 : Connection refused (Connection refused)
+IP: localhost : 1300
+IP: localhost : 1300
+00:52:38 - Couldn't send message: [5|2|9|TRANSACTION|2]
+00:52:38 - Couldn't send message: [1|2|7|TRANSACTION|2]
+00:52:38 - counter: 66 : Connection refused (Connection refused)
+00:52:38 - counter: 66 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:38 - Couldn't send message: [5|2|9|TRANSACTION|1]
+00:52:38 - counter: 68 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:38 - Couldn't send message: [1|5|10|TRANSACTION|6]
+00:52:38 - counter: 70 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:38 - Couldn't send message: [1|0|9|TRANSACTION|1]
+00:52:38 - counter: 72 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:38 - Couldn't send message: [1|2|7|TRANSACTION|1]
+00:52:38 - counter: 73 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:38 - Couldn't send message: [5|0|2|TRANSACTION|2]
+00:52:38 - counter: 74 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:38 - Couldn't send message: [5|5|8|TRANSACTION|1]
+00:52:38 - counter: 75 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:38 - Couldn't send message: [5|3|7|TRANSACTION|1]
+00:52:38 - counter: 76 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:38 - Couldn't send message: [5|3|7|TRANSACTION|6]
+00:52:38 - counter: 77 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:38 - Couldn't send message: [5|5|8|TRANSACTION|6]
+00:52:38 - counter: 78 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:38 - Couldn't send message: [5|3|7|TRANSACTION|2]
+00:52:38 - counter: 79 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:39 - Couldn't send message: [4|0|4|AB_MARKER|6]
+00:52:39 - counter: 81 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:40 - Couldn't send message: [3|0||AB_TELL|1]
+00:52:40 - counter: 83 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:40 - Couldn't send message: [3|6|9|TRANSACTION|1]
+00:52:40 - counter: 85 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:40 - Couldn't send message: [3|5|9|TRANSACTION|2]
+00:52:40 - counter: 86 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:40 - Couldn't send message: [4|0|4|AB_MARKER|2]
+00:52:40 - counter: 87 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:40 - Couldn't send message: [3|0||AB_TELL|6]
+00:52:40 - counter: 89 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:40 - Couldn't send message: [3|6|9|TRANSACTION|2]
+00:52:40 - counter: 90 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:40 - Couldn't send message: [3|3|4|TRANSACTION|2]
+00:52:40 - counter: 91 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:40 - Couldn't send message: [3|4|10|TRANSACTION|6]
+00:52:40 - counter: 92 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:40 - Couldn't send message: [3|1|6|TRANSACTION|6]
+00:52:40 - counter: 93 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:40 - Couldn't send message: [3|0||AB_TELL|2]
+00:52:40 - counter: 94 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:40 - Couldn't send message: [3|6|9|TRANSACTION|6]
+00:52:40 - counter: 95 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:40 - Couldn't send message: [3|3|3|TRANSACTION|6]
+00:52:40 - counter: 97 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:40 - Couldn't send message: [3|5|8|TRANSACTION|1]
+00:52:40 - counter: 98 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:40 - Couldn't send message: [4|0|4|AB_MARKER|1]
+00:52:40 - counter: 100 : Connection refused (Connection refused)
+IP: localhost : 1700
+00:52:40 - Couldn't send message: [3|5|4|TRANSACTION|6]
+00:52:40 - counter: 102 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:40 - Couldn't send message: [3|3|10|TRANSACTION|1]
+00:52:40 - counter: 103 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:40 - Couldn't send message: [3|1|1|TRANSACTION|1]
+00:52:40 - counter: 104 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:40 - Couldn't send message: [3|1|3|TRANSACTION|2]
+00:52:40 - counter: 105 : Connection refused (Connection refused)
+IP: localhost : 1300
+00:52:40 - Couldn't send message: [3|4|2|TRANSACTION|2]
+00:52:40 - counter: 106 : Connection refused (Connection refused)
+IP: localhost : 1200
+00:52:40 - Couldn't send message: [3|4|10|TRANSACTION|1]
+00:52:40 - counter: 107 : Connection refused (Connection refused)

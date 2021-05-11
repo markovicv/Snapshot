@@ -3,6 +3,7 @@ package app;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.snapshot_bitcake.ABBitcakeManager;
 import app.snapshot_bitcake.SnapshotCollector;
 import app.snapshot_bitcake.SnapshotCollectorWorker;
 import app.snapshot_bitcake.SnapshotType;
@@ -66,7 +67,7 @@ public class ServentMain {
 
         SnapshotCollector snapshotCollector;
 
-        snapshotCollector = new SnapshotCollectorWorker(AppConfig.SNAPSHOT_TYPE);
+        snapshotCollector = new SnapshotCollectorWorker(AppConfig.SNAPSHOT_TYPE,new ABBitcakeManager());
 
         Thread snapshotCollectorThread = new Thread(snapshotCollector);
         snapshotCollectorThread.start();

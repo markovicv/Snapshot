@@ -34,19 +34,19 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
 
     private Map<Integer,DoneMessage> doneMessages = new ConcurrentHashMap<>();
 
-    public SnapshotCollectorWorker(SnapshotType snapshotType) {
+    public SnapshotCollectorWorker(SnapshotType snapshotType,BitcakeManager bitcakeManager) {
         this.snapshotType = snapshotType;
-
-        switch (snapshotType) {
-            case AB:
-                bitcakeManager = new ABBitcakeManager();
-                break;
-
-
-            case NONE:
-                AppConfig.timestampedErrorPrint("Making snapshot collector without specifying type. Exiting...");
-                System.exit(0);
-        }
+        this.bitcakeManager = bitcakeManager;
+//        switch (snapshotType) {
+//            case AB:
+//                bitcakeManager = new ABBitcakeManager();
+//                break;
+//
+//
+//            case NONE:
+//                AppConfig.timestampedErrorPrint("Making snapshot collector without specifying type. Exiting...");
+//                System.exit(0);
+//        }
     }
 
     @Override
@@ -139,7 +139,7 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
                         sum+=entry.getValue().getRecordedAmount();
                         AppConfig.timestampedStandardPrint(
                                 "Recorded bitcake amount for " + entry.getKey() + " = " + entry.getValue().getRecordedAmount());
-                    }
+                    };
 
                     for(int i=0; i<AppConfig.getServentCount();i++){
                         for(int j=0;j<AppConfig.getServentCount();j++){

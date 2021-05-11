@@ -68,32 +68,10 @@ public class MessageUtil {
 	
 	public static void sendMessage(Message message) {
 
-//		System.out.println("unutar send message: "+message.getVectorClock());
-//		System.out.println(message);
+
 		Thread thread = new Thread(new DelayedMessageSender(message));
 		thread.start();
-//		try{
-//			Thread.sleep((long)(Math.random()*1000)+500);
-//		}
-//		catch (Exception e){
-//			e.printStackTrace();
-//		}
-//		ServentInfo receiverInfo = message.getReceiverInfo();
-//		if(MESSAGE_UTIL_PRINTING)
-//			AppConfig.timestampedStandardPrint("Sending message "+message);
-//
-//		try{
-//
-//			Socket sendSocket = new Socket(receiverInfo.getIpAddress(),receiverInfo.getListenerPort());
-//			ObjectOutputStream oos = new ObjectOutputStream(sendSocket.getOutputStream());
-//			oos.writeObject(message);
-//			oos.flush();
-//			sendSocket.close();
-//		}
-//		catch (IOException e){
-//
-//			AppConfig.timestampedErrorPrint("Couldnt send message: "+message.toString());
-//		}
+
 
 	}
 }

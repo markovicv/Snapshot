@@ -15,85 +15,85 @@ import java.util.Map;
 
 public class TransactionHandler implements MessageHandler {
 
-	private Message clientMessage;
-	private BitcakeManager bitcakeManager;
+    private Message clientMessage;
+    private BitcakeManager bitcakeManager;
 
-	//TODO ako je meni namenjena obradim i posaljem drugima, inace samo broadcastujem
-	
-	public TransactionHandler(Message clientMessage, BitcakeManager bitcakeManager) {
-		this.clientMessage = clientMessage;
-		this.bitcakeManager = bitcakeManager;
-	}
+    //TODO ako je meni namenjena obradim i posaljem drugima, inace samo broadcastujem
 
-	@Override
-	public void run() {
-		if (clientMessage.getMessageType() == MessageType.TRANSACTION) {
-			if(clientMessage.getOriginalSenderInfo().getId()!=AppConfig.myServentInfo.getId()){
-				boolean didPut = CausalBroadcastShared.seenMessages.add(clientMessage);
-				if(didPut){
-					CausalBroadcastShared.addPendingMessages(clientMessage);
-					CausalBroadcastShared.checkPandingMessages();
+    public TransactionHandler(Message clientMessage, BitcakeManager bitcakeManager) {
+        this.clientMessage = clientMessage;
+        this.bitcakeManager = bitcakeManager;
+    }
 
-
-
-					AppConfig.timestampedStandardPrint("Rebroadcasting");
-					for(Integer neighbor:AppConfig.myServentInfo.getNeighbors()){
-						MessageUtil.sendMessage(clientMessage.changeReceiver(neighbor).makeMeASender());
+    @Override
+    public void run() {
+        if (clientMessage.getMessageType() == MessageType.TRANSACTION) {
+            if (clientMessage.getOriginalSenderInfo().getId() != AppConfig.myServentInfo.getId()) {
+                boolean didPut = CausalBroadcastShared.seenMessages.add(clientMessage);
+                if (didPut) {
+                    clientMessage.setBitcakeManager(this.bitcakeManager);
+                    CausalBroadcastShared.addPendingMessages(clientMessage);
+                    CausalBroadcastShared.checkPandingMessages();
 
 
-					}
-				}
-				else {
-					AppConfig.timestampedStandardPrint("Seen this transaction");
-				}
-			}
+                    AppConfig.timestampedStandardPrint("Rebroadcasting");
+                    for (Integer neighbor : AppConfig.myServentInfo.getNeighbors()) {
+                        MessageUtil.sendMessage(clientMessage.changeReceiver(neighbor).makeMeASender());
 
-		}
-		else {
-			AppConfig.timestampedErrorPrint("Transaction handler got: " + clientMessage);
-		}
-	}
-	public static void handleTransaction(Message clientMessage){
-		String amountString = clientMessage.getMessageText();
-		BitcakeManager bitcakeManager = clientMessage.getBitcakeManager();
 
-		int amountNumber = 0;
-		try {
-			amountNumber = Integer.parseInt(amountString);
-		} catch (NumberFormatException e) {
-			AppConfig.timestampedErrorPrint("Couldn't parse amount: " + amountString);
-			return;
-		}
+                    }
+                } else {
+                    AppConfig.timestampedStandardPrint("Seen this transaction");
+                }
+            }
 
-		bitcakeManager.addSomeBitcakes(amountNumber);
+        } else {
+            AppConfig.timestampedErrorPrint("Transaction handler got: " + clientMessage);
+        }
+    }
 
-		if(AppConfig.SNAPSHOT_TYPE== SnapshotType.AB){
-			synchronized (CausalBroadcastShared.recdLock){
-				int senderId = clientMessage.getOriginalSenderInfo().getId();
-				List<Integer> receivedListMessages = CausalBroadcastShared.RECD.getOrDefault(senderId,new ArrayList<>());
-				receivedListMessages.add(Integer.parseInt(clientMessage.getMessageText()));
-				CausalBroadcastShared.RECD.put(senderId,receivedListMessages);
-			}
-		}
+    public static void handleTransaction(Message clientMessage) {
+        String amountString = clientMessage.getMessageText();
+        BitcakeManager bitcakeManager = clientMessage.getBitcakeManager();
+
+        int amountNumber = 0;
+        try {
+            amountNumber = Integer.parseInt(amountString);
+        } catch (NumberFormatException e) {
+            AppConfig.timestampedErrorPrint("Couldn't parse amount: " + amountString);
+            return;
+        }
+
+        bitcakeManager.addSomeBitcakes(amountNumber);
+
+
+        if (AppConfig.SNAPSHOT_TYPE == SnapshotType.AB) {
+            synchronized (CausalBroadcastShared.recdLock) {
+                int senderId = clientMessage.getOriginalSenderInfo().getId();
+                List<Integer> receivedListMessages = CausalBroadcastShared.RECD.getOrDefault(senderId, new ArrayList<>());
+                receivedListMessages.add(Integer.parseInt(clientMessage.getMessageText()));
+                CausalBroadcastShared.RECD.put(senderId, receivedListMessages);
+            }
+        }
 
 
 		/*
 		 provera da li je poruka stara ili nova
 		 */
-		if(AppConfig.SNAPSHOT_TYPE==SnapshotType.AV){
-			synchronized (AppConfig.avLock){
-				if( CausalBroadcastShared.avMarkerMessage!=null &&
-						!CausalBroadcastShared.otherClockGreates(clientMessage.getVectorClock(),CausalBroadcastShared.avMarkerMessage.getVectorClock())){
-					String chanelKey = String.valueOf(AppConfig.myServentInfo.getId())+"-"+clientMessage.getOriginalSenderInfo().getId();
-					List<Integer> channelMsg = ((AVBitcakeManager)bitcakeManager).channels.getOrDefault(chanelKey,new ArrayList<>());
-					channelMsg.add(Integer.parseInt(clientMessage.getMessageText()));
-					((AVBitcakeManager)bitcakeManager).channels.put(chanelKey,channelMsg);
-				}
+        if (AppConfig.SNAPSHOT_TYPE == SnapshotType.AV) {
+            synchronized (AppConfig.avLock) {
+                if (CausalBroadcastShared.avMarkerMessage != null &&
+                        !CausalBroadcastShared.otherClockGreates(clientMessage.getVectorClock(), CausalBroadcastShared.avMarkerMessage.getVectorClock())) {
+                    String chanelKey = String.valueOf(AppConfig.myServentInfo.getId()) + "-" + clientMessage.getOriginalSenderInfo().getId();
+                    List<Integer> channelMsg = ((AVBitcakeManager) bitcakeManager).channels.getOrDefault(chanelKey, new ArrayList<>());
+                    channelMsg.add(Integer.parseInt(clientMessage.getMessageText()));
+                    ((AVBitcakeManager) bitcakeManager).channels.put(chanelKey, channelMsg);
+                }
 
-			}
+            }
 
-		}
+        }
 
-	}
+    }
 
 }
