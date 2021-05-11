@@ -3,9 +3,11 @@ package app.snapshot_bitcake;
 import app.AppConfig;
 import servent.message.Message;
 import servent.message.snapshot.ABMarkerMessage;
+import servent.message.snapshot.AVMarkerMessage;
 
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiFunction;
 
 public class CausalBroadcastShared {
@@ -24,6 +26,10 @@ public class CausalBroadcastShared {
 
     public static Object sentLock = new Object();
     public static Object recdLock = new Object();
+
+
+    public static AVMarkerMessage avMarkerMessage;
+
 
     public static void initVectorClock(int serventCount){
         for(int i=0;i<serventCount;i++){
@@ -49,10 +55,11 @@ public class CausalBroadcastShared {
     public static void commitCausalMessage(Message causalMessage){
         commitedCausalMessages.add(causalMessage);
         incrementClock(causalMessage.getOriginalSenderInfo().getId());
+        AppConfig.isAVMarkerSent.set(true);
         checkPandingMessages();
     }
 
-    private static boolean otherClockGreates(Map<Integer,Integer> clock1,Map<Integer,Integer> clock2){
+    public static boolean otherClockGreates(Map<Integer,Integer> clock1,Map<Integer,Integer> clock2){
         if(clock1.size()!=clock2.size())
             throw new IllegalArgumentException("clocks are not same size");
         for(int i=0;i<clock1.size();i++){

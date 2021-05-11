@@ -9,6 +9,7 @@ import java.util.List;
 import app.AppConfig;
 import app.ServentInfo;
 import app.snapshot_bitcake.CausalBroadcastShared;
+import app.snapshot_bitcake.SnapshotType;
 import servent.message.Message;
 import servent.message.MessageType;
 import servent.message.snapshot.ABMarkerMessage;
@@ -54,14 +55,26 @@ public class DelayedMessageSender implements Runnable {
             sendSocket.close();
 
             /*
-                SENT logika
+                SENT logika, za AB algoritam
              */
-            synchronized (CausalBroadcastShared.sentLock){
-                int receiverId = messageToSend.getReceiverInfo().getId();
-                List<Integer> sentMessagesList =  CausalBroadcastShared.SENT.getOrDefault(receiverId,new ArrayList<>());
-                sentMessagesList.add(Integer.parseInt(messageToSend.getMessageText()));
-                CausalBroadcastShared.SENT.put(receiverId,sentMessagesList);
+            if(AppConfig.SNAPSHOT_TYPE == SnapshotType.AB){
+                synchronized (CausalBroadcastShared.sentLock){
+                    int receiverId = messageToSend.getReceiverInfo().getId();
+                    List<Integer> sentMessagesList =  CausalBroadcastShared.SENT.getOrDefault(receiverId,new ArrayList<>());
+                    sentMessagesList.add(Integer.parseInt(messageToSend.getMessageText()));
+                    CausalBroadcastShared.SENT.put(receiverId,sentMessagesList);
+                }
             }
+            /*
+             sent logika, za AV algoritam
+             */
+//            if(AppConfig.SNAPSHOT_TYPE==SnapshotType.AV){
+//                synchronized (AppConfig.avLock){
+//                    if(AppConfig.isAVMarkerSent.get())
+//                        messageToSend.setMsgStatus(true);
+//                }
+//            }
+
 
             messageToSend.sendEffect();
 

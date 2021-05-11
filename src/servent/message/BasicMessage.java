@@ -35,6 +35,11 @@ public class BasicMessage implements Message {
 	protected int collectorId;
 	protected transient BitcakeManager bitcakeManager;
 
+	/*
+	 av
+	 */
+	protected boolean isNew;
+
 
 	public BasicMessage(MessageType type, ServentInfo originalSenderInfo, ServentInfo receiverInfo) {
 		this.type = type;
@@ -141,6 +146,16 @@ public class BasicMessage implements Message {
 		this.bitcakeManager = bitcakeManager;
 	}
 
+	@Override
+	public boolean isMsgNew() {
+		return isNew;
+	}
+
+	@Override
+	public void setMsgStatus(boolean status) {
+		this.isNew = status;
+	}
+
 	protected BasicMessage(MessageType type, ServentInfo originalSenderInfo, ServentInfo receiverInfo,
 						   boolean white, List<ServentInfo> routeList, String messageText, int messageId) {
 		this.type = type;
@@ -178,6 +193,13 @@ public class BasicMessage implements Message {
 			toReturn.setVectorClock(getVectorClock());
 			toReturn.setBitcakeManager(getBitcakeManager());
 		}
+		if(getMessageType()==MessageType.AV_MARKER){
+			toReturn.setVectorClock(getVectorClock());
+
+		}
+		if(getMessageType() == MessageType.DONE){
+			toReturn.setCollectorId(getCollectorId());
+		}
 		
 		return toReturn;
 	}
@@ -205,6 +227,12 @@ public class BasicMessage implements Message {
 				toReturn.setVectorClock(getVectorClock());
 				toReturn.setBitcakeManager(getBitcakeManager());
 
+			}
+			if(getMessageType()==MessageType.AV_MARKER){
+				toReturn.setVectorClock(getVectorClock());
+			}
+			if(getMessageType() == MessageType.DONE){
+				toReturn.setCollectorId(getCollectorId());
 			}
 
 			

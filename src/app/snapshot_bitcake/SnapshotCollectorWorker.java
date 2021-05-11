@@ -1,13 +1,17 @@
 package app.snapshot_bitcake;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import app.AppConfig;
 import servent.message.Message;
+import servent.message.snapshot.DoneMessage;
+import servent.message.snapshot.TerminateMessage;
 import servent.message.util.MessageUtil;
 
 /**
@@ -28,6 +32,8 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
     private BitcakeManager bitcakeManager;
     private Map<Integer,ABSnapshotResult> collectedABValues = new ConcurrentHashMap<>();
 
+    private Map<Integer,DoneMessage> doneMessages = new ConcurrentHashMap<>();
+
     public SnapshotCollectorWorker(SnapshotType snapshotType) {
         this.snapshotType = snapshotType;
 
@@ -35,6 +41,7 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
             case AB:
                 bitcakeManager = new ABBitcakeManager();
                 break;
+
 
             case NONE:
                 AppConfig.timestampedErrorPrint("Making snapshot collector without specifying type. Exiting...");
@@ -78,8 +85,10 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
             switch (snapshotType) {
 
                 case AB:
-                    ((ABBitcakeManager)bitcakeManager).markEvent();
+                    ((ABBitcakeManager)bitcakeManager).initSnapshot();
                     break;
+                case AV:
+                    ((AVBitcakeManager)bitcakeManager).initSnapshot();
 
                 case NAIVE:
                     break;
@@ -96,6 +105,13 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
                         if(collectedABValues.size() == AppConfig.getServentCount()){
                             waiting=false;
                         }
+                        break;
+                    case AV:
+                        /*
+                         waiting for done response
+                         */
+                        if(doneMessages.size() == AppConfig.getServentCount())
+                            waiting=false;
                         break;
 
                     case NONE:
@@ -151,6 +167,12 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
                     AppConfig.timestampedStandardPrint("System bitcake count: " + sum);
                     collectedABValues.clear();
                     break;
+                case AV:
+                    Message terminateMessage = new TerminateMessage(AppConfig.myServentInfo,null,-1);
+                    for(Integer neighbor : AppConfig.myServentInfo.getNeighbors()){
+                        terminateMessage = terminateMessage.changeReceiver(neighbor);
+                        MessageUtil.sendMessage(terminateMessage);
+                    }
 
                 case NONE:
                     //Shouldn't be able to come here. See constructor.
@@ -174,6 +196,11 @@ public class SnapshotCollectorWorker implements SnapshotCollector {
         System.out.println("UBACIO JE :::: "+id +" kolicina ::::"+snapshotResult.getRecordedAmount());
         this.collectedABValues.put(id,snapshotResult);
 
+    }
+
+    @Override
+    public void addAVInfo(int id, DoneMessage doneMessage) {
+        this.doneMessages.put(id,doneMessage);
     }
 
     @Override

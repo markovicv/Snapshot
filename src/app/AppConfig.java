@@ -11,6 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import app.snapshot_bitcake.AVSnapshotResult;
 import app.snapshot_bitcake.CausalBroadcastShared;
 import app.snapshot_bitcake.SnapshotType;
 import servent.message.Message;
@@ -58,6 +59,10 @@ public class AppConfig {
     public static Object msgLock = new Object();
     public static Set<Message> seen = Collections.newSetFromMap(new ConcurrentHashMap<Message, Boolean>());
 
+    public static AtomicBoolean isAVMarkerSent = new AtomicBoolean(false);
+    public static Object avLock = new Object();
+
+    public static AVSnapshotResult avSnapshotResult;
 
     /**
      * Print a message to stdout with a timestamp
@@ -146,6 +151,8 @@ public class AppConfig {
             case "ab":
                 SNAPSHOT_TYPE = SnapshotType.AB;
                 break;
+            case "av":
+                SNAPSHOT_TYPE = SnapshotType.AV;
             default:
                 timestampedErrorPrint("Problem reading snapshot algorithm. Defaulting to NONE.");
                 SNAPSHOT_TYPE = SnapshotType.NONE;

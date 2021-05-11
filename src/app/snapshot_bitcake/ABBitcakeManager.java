@@ -37,7 +37,7 @@ public class ABBitcakeManager implements BitcakeManager{
     /*
         initiates causal broadcast marker to all neighbors
      */
-    public void markEvent(){
+    public void initSnapshot(){
 
         Map<Integer,Integer> myClock = CausalBroadcastShared.getVectorClock();
         Map<Integer,Integer> myClockCopy = new ConcurrentHashMap<>(myClock);

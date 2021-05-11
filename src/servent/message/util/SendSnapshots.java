@@ -2,14 +2,12 @@ package servent.message.util;
 
 import app.AppConfig;
 import app.Cancellable;
-import app.snapshot_bitcake.ABBitcakeManager;
-import app.snapshot_bitcake.BitcakeManager;
-import app.snapshot_bitcake.CausalBroadcastShared;
-import app.snapshot_bitcake.SnapshotCollector;
+import app.snapshot_bitcake.*;
 import servent.handler.TransactionHandler;
 import servent.message.Message;
 import servent.message.MessageType;
 import servent.message.PoisonMessage;
+import servent.message.snapshot.AVMarkerMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +41,13 @@ public class SendSnapshots implements Runnable, Cancellable {
                 if(message.getMessageType() == MessageType.TRANSACTION){
                     if(message.getReceiverInfo().getId() == AppConfig.myServentInfo.getId()){
                         TransactionHandler.handleTransaction(message);
-
-
                     }
 
+                }
+                if(message.getMessageType() == MessageType.AV_MARKER){
+                    CausalBroadcastShared.avMarkerMessage = (AVMarkerMessage) message;
+                    AVBitcakeManager avBitcakeManager = (AVBitcakeManager)bitcakeManager;
+                    avBitcakeManager.handleMarker(message,snapshotCollector,avBitcakeManager.getCurrentBitcakeAmount());
                 }
 
 

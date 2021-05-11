@@ -114,6 +114,9 @@ public interface Message extends Serializable {
 	BitcakeManager getBitcakeManager();
 	void setBitcakeManager(BitcakeManager bitcakeManager);
 
+	boolean isMsgNew();
+	void setMsgStatus(boolean status);
+
 	/**
 	 * This method is invoked by the frameworks sender code. It is invoked
 	 * exactly before the message is being sent. If the message was held up
