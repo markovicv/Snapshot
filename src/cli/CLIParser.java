@@ -15,7 +15,7 @@ import cli.command.PingCommand;
 import cli.command.StopCommand;
 import cli.command.TransactionBurstCommand;
 import servent.SimpleServentListener;
-import servent.message.util.SendSnapshots;
+import servent.message.util.CausalWorker;
 
 /**
  * A simple CLI parser. Each command has a name and arbitrary arguments.
@@ -42,7 +42,7 @@ public class CLIParser implements Runnable, Cancellable {
 	private final List<CLICommand> commandList;
 	
 	public CLIParser(SimpleServentListener listener,
-					 SnapshotCollector snapshotCollector, SendSnapshots sendSnapshots) {
+					 SnapshotCollector snapshotCollector, CausalWorker sendSnapshots) {
 		this.commandList = new ArrayList<>();
 		
 		commandList.add(new InfoCommand());

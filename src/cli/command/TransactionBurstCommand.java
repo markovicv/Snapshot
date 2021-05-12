@@ -45,7 +45,6 @@ public class TransactionBurstCommand implements CLICommand {
 				}
 				// povecati vector clock posle svake poruke
 				transactionMessage = transactionMessage.changeReceiver(AppConfig.myServentInfo.getId());
-//				CausalBroadcastShared.initVectorClock(AppConfig.myServentInfo.getId());
 				CausalBroadcastShared.commitCausalMessage(transactionMessage);
 			}
 		}

@@ -53,17 +53,13 @@ public class AVBitcakeManager implements BitcakeManager{
     }
     public void handleMarker(Message clientMessage,SnapshotCollector snapshotCollector,int currentBitcake){
         AVSnapshotResult avSnapshotResult = new AVSnapshotResult(AppConfig.myServentInfo.getId(),currentBitcake);
-        /*
-          dodaj u svoje stanje lokalni rezultat | DONE!
-         */
+
 
         AppConfig.avSnapshotResult = avSnapshotResult;
 
         channels.clear();
 
-        /*
-            vrati Done poruku inicijatoru | DONE!
-         */
+
         Message doneMessage = new DoneMessage(AppConfig.myServentInfo,null,clientMessage.getOriginalSenderInfo().getId());
         for(Integer neighbor:AppConfig.myServentInfo.getNeighbors()){
             doneMessage = doneMessage.changeReceiver(neighbor);

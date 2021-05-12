@@ -44,6 +44,7 @@ public class DelayedMessageSender implements Runnable {
         }
 
 
+
         try {
 
             Socket sendSocket = new Socket(receiverInfo.getIpAddress(), receiverInfo.getListenerPort());
@@ -68,15 +69,7 @@ public class DelayedMessageSender implements Runnable {
 
                 }
             }
-            /*
-             sent logika, za AV algoritam
-             */
-//            if(AppConfig.SNAPSHOT_TYPE==SnapshotType.AV){
-//                synchronized (AppConfig.avLock){
-//                    if(AppConfig.isAVMarkerSent.get())
-//                        messageToSend.setMsgStatus(true);
-//                }
-//            }
+
 
 
             messageToSend.sendEffect();
@@ -87,7 +80,13 @@ public class DelayedMessageSender implements Runnable {
             System.err.println("IP: " + messageToSend.getReceiverInfo().getIpAddress() + " : " + messageToSend.getReceiverInfo().getListenerPort());
             AppConfig.timestampedErrorPrint("Couldn't send message: " + messageToSend.toString());
             AppConfig.timestampedErrorPrint("counter: "+counter+" : "+e.getMessage());
-
+//            try {
+//                Thread.sleep((long) (Math.random() * 1000) + 500);
+//            } catch (InterruptedException e1) {
+//                e1.printStackTrace();
+//            }
+//            Thread t = new Thread(new DelayedMessageSender(messageToSend));
+//            t.start();
 
         }
         counter++;

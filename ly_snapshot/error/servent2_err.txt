@@ -1,3 +1,0 @@
-IP: localhost : 1100
-00:52:36 - Couldn't send message: [2|0|2|TRANSACTION|0]
-00:52:36 - counter: 17 : Connection refused (Connection refused)

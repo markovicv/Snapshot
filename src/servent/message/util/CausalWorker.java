@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class SendSnapshots implements Runnable, Cancellable {
+public class CausalWorker implements Runnable, Cancellable {
 
     SnapshotCollector snapshotCollector;
     BitcakeManager bitcakeManager;
 
-    public SendSnapshots(SnapshotCollector snapshotCollector) {
+    public CausalWorker(SnapshotCollector snapshotCollector) {
         this.snapshotCollector = snapshotCollector;
         this.bitcakeManager = snapshotCollector.getBitcakeManager();
     }

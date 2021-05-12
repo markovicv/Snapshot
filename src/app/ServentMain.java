@@ -1,16 +1,12 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import app.snapshot_bitcake.ABBitcakeManager;
 import app.snapshot_bitcake.SnapshotCollector;
 import app.snapshot_bitcake.SnapshotCollectorWorker;
-import app.snapshot_bitcake.SnapshotType;
 import cli.CLIParser;
 import servent.SimpleServentListener;
 import servent.message.util.MessageUtil;
-import servent.message.util.SendSnapshots;
+import servent.message.util.CausalWorker;
 
 /**
  * Describes the procedure for starting a single Servent
@@ -76,7 +72,7 @@ public class ServentMain {
         Thread listenerThread = new Thread(simpleListener);
         listenerThread.start();
 
-        SendSnapshots sendSnapshots = new SendSnapshots(snapshotCollector);
+        CausalWorker sendSnapshots = new CausalWorker(snapshotCollector);
         Thread sendSnapshotThread = new Thread(sendSnapshots);
         sendSnapshotThread.start();
 
